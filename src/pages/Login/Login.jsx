@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
     return (
@@ -69,7 +70,7 @@ const Login = () => {
                             </svg>
                         </button>
                     </div>
-                    <p className="text-sm mt-3 text-center">Do not have an account <a href="" className="text-[#1E2772] hover:underline ml-1 whitespace-nowrap">Register here</a></p>
+                    <p className="text-sm mt-3 text-center">Do not have an account <Link to='/register' className="text-[#1E2772] hover:underline ml-1 whitespace-nowrap">Register here</Link></p>
                 </div>
             </div>
         </div>

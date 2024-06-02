@@ -4,6 +4,7 @@ import { FaPhone } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 const Navbar = () => {
     const navLinks = <>
+        <Link to='/'><li className='ml-5 text-[15px] font-bold'>Home</li></Link>
         <li className='ml-5 text-[15px] font-bold'>Pet Listing</li>
         <li className='ml-5 text-[15px] font-bold'>Donation Campaigns</li>
     </>
