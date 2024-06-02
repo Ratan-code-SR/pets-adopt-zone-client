@@ -1,8 +1,32 @@
-# React + Vite
+## MY Service
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Click here for see my website:   
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# In my project, I have implemented which packages.
+## Css FrameWork :
+- [Daisy UI](https://daisyui.com/)
+- [TailwindCSS](https://tailwindcss.com/)
+
+
+
+## NPM Packages :
+- [React-toastify](https://www.npmjs.com/package/react-toastify)
+- [React-Router](https://reactrouter.com/en/main)
+- [Prop-Types](https://www.npmjs.com/package/prop-types)
+- [React-Icons](https://react-icons.github.io/react-icons/)
+- [React-Aos-package](https://michalsnik.github.io/aos/)
+- [Swiperjs](https://swiperjs.com/)
+- [sweetalert2](https://sweetalert2.github.io/)
+- [Axios](https://axios-http.com/)
+
+
+
+##  I have implemented Authentication system this package
+- [Firebase](https://firebase.google.com/)
+
+## Backend Technology Node js Framework Express
+- [Express js](https://expressjs.com/)
+
+## Database MongoDB
+- [MongoDB Atlas ](https://www.mongodb.com/atlas/database)
