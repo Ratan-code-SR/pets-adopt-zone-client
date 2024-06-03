@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from '../../Hooks/useAuth';
+import { toast } from "react-toastify";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
     const {
@@ -10,14 +13,44 @@ const Login = () => {
         reset,
         formState: { errors },
     } = useForm()
+    const { loginUser,signInGoogle } = useAuth()
+    const navigate = useNavigate()
+    const axiosPublic = useAxiosPublic()
 
     const onSubmit = (data) => {
         const email = data.email;
         const password = data.password;
-        const loginInfo = { email, password }
-        console.log(loginInfo);
+        loginUser(email, password)
+            .then(result => {
+                console.log(result);
+                toast.success("user login successfully!!")
+                navigate(location.state?.from?.pathname || "/")
+                reset()
+            })
+            .catch(error => {
+                console.log(error.message);
+                toast.error(error.message)
+            })
         reset()
     }
+
+    const handleGoogleLogin = () => {
+        signInGoogle()
+            .then(result => {
+                const userInfo = {
+                    name: result.user?.displayName,
+                    email: result.user?.email
+                }
+                axiosPublic.post("/users", userInfo)
+                    .then(res => {
+                        console.log(res.data);
+                        toast.success("google login successfully!!!")
+                        navigate(location.state?.from?.pathname || "/")
+                    })
+
+            })
+    }
+
     return (
         <div>
             <div className="bg-white font-[sans-serif] text-[#333] min-h-screen flex flex-col items-center justify-center py-6 px-4">
@@ -68,6 +101,7 @@ const Login = () => {
                     <p className="my-2 text-sm text-gray-400 text-center">or continue with</p>
                     <div className="space-x-8 flex justify-center">
                         <button
+                            onClick={handleGoogleLogin}
                             className="border-none outline-none">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30px" className="inline" viewBox="0 0 512 512">
                                 <path fill="#fbbd00"

@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from '../../Hooks/useAuth'
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false)
     const {
@@ -10,14 +14,54 @@ const Register = () => {
         reset,
         formState: { errors },
     } = useForm()
-    const onSubmit = (data) => {
-        const name = data.name;
-        const email = data.email;
-        const password = data.password;
-        const photo = 'hello';
-        const userInfo = { name, email, password, photo }
-        console.log(userInfo);
-        reset()
+    const navigate = useNavigate()
+    const axiosPublic = useAxiosPublic()
+    const { signUpUser, userProfileUpdated, setUser, user } = useAuth()
+    const imageBB_hosting_key = import.meta.env.VITE_imgBB_add_api_key;
+    const image_hosting_api = `https://api.imgbb.com/1/upload?key=${imageBB_hosting_key}`;
+
+    const onSubmit = async (data) => {
+        const imageFile = new FormData();
+        const image = data.file[0]
+        imageFile.append("image", image);
+
+        const res = await axiosPublic.post(image_hosting_api, imageFile, {
+            headers: {
+                "content-type": "multipart/form-data",
+            }
+        })
+        if (res.data.success) {
+            console.log(data);
+            const name = data.name;
+            const email = data.email;
+            const password = data.password;
+            const photo = res.data.data.display_url
+            // const userInfo = { name, email, password, photo }
+            // console.log(userInfo);
+            signUpUser(email, password)
+                .then(result => {
+                    console.log(result);
+                    userProfileUpdated(name, photo)
+                        .then(() => {
+                            const userInfo = { name,email}
+                            axiosPublic.post("/users", userInfo)
+                                .then(res => {
+                                    if (res.data.insertedId) {
+                                        setUser({ ...user, photoURL: photo, displayName: name })
+                                        toast.success("user account create successfully!!")
+                                    }
+                                })
+
+                            navigate(location?.state ? location.state : "/")
+                        })
+
+
+                })
+                .catch(error => {
+                    toast.error(error.message)
+                })
+            reset()
+        }
     }
     return (
         <div className="font-[sans-serif] bg-white text-[#333] ">
@@ -127,6 +171,7 @@ const Register = () => {
                     </form>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 };
