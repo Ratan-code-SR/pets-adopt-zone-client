@@ -1,8 +1,23 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm()
+
+    const onSubmit = (data) => {
+        const email = data.email;
+        const password = data.password;
+        const loginInfo = { email, password }
+        console.log(loginInfo);
+        reset()
+    }
     return (
         <div>
             <div className="bg-white font-[sans-serif] text-[#333] min-h-screen flex flex-col items-center justify-center py-6 px-4">
@@ -13,18 +28,30 @@ const Login = () => {
                             <path fill="#556080" d="M26.953.004C12.32-.246.254 11.414.004 26.047-.138 34.344 3.56 41.801 9.448 46.76a7.041 7.041 0 0 1 1.257-.894l7.907-4.313a3.23 3.23 0 0 0 1.683-2.835v-3.24s-2.321-2.776-3.206-6.633a2.66 2.66 0 0 1-1.226-2.231v-3.546c0-.78.347-1.477.886-1.965v-5.126S15.696 8 26.499 8s9.75 7.977 9.75 7.977v5.126c.54.488.886 1.185.886 1.965v3.546c0 1.192-.8 2.195-1.886 2.53a19.482 19.482 0 0 1-2.632 5.304c-.291.411-.563.759-.801 1.03V38.8c0 1.223.691 2.342 1.785 2.888l8.467 4.233a7.05 7.05 0 0 1 1.39.932c5.71-4.762 9.399-11.882 9.536-19.9C53.246 12.32 41.587.254 26.953.004z" />
                         </svg>
                     </div>
-                    <form className="mt-10 space-y-4">
+                    <form onSubmit={handleSubmit(onSubmit)} className="mt-10 space-y-4">
                         <div className="relative flex items-center">
-                            <input name="email" type="email" required className="w-full text-sm bg-white border-2 border-transparent focus:border-[#1E2772] px-4 py-3 rounded-md outline-none" placeholder="Enter email" />
+                            <input
+                                {...register("email", { required: true })}
+                                name="email"
+                                type="email"
+                                placeholder="Enter email"
+                                className="w-full text-sm bg-white border-2 border-transparent focus:border-[#1E2772] px-4 py-3 rounded-md outline-none" />
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" className="w-[18px] h-[18px] absolute right-4" viewBox="0 0 24 24">
                                 <circle cx="10" cy="7" r="6"></circle>
                                 <path d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"></path>
                             </svg>
                         </div>
+                        {errors.email && <small className="text-red-400">This field is required</small>}
                         <div className="relative flex items-center">
-                            <input name="password" type={`${showPassword ? "text" : "password"}`} required className="w-full text-sm bg-white border-2 border-transparent focus:border-[#1E2772] px-4 py-3 rounded-md outline-none" placeholder="Enter password" />
+                            <input
+                                {...register("password", { required: true })}
+                                name="password"
+                                type={`${showPassword ? "text" : "password"}`}
+                                placeholder="Enter password"
+                                className="w-full text-sm bg-white border-2 border-transparent focus:border-[#1E2772] px-4 py-3 rounded-md outline-none" />
                             <span onClick={() => setShowPassword(!showPassword)} className='absolute right-2'>{showPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}</span>
                         </div>
+                        {errors.password && <small className="text-red-400">This field is required</small>}
                         <div>
                             <div>
                                 <a className="text-sm text-[#1E2772] hover:underline">
@@ -32,7 +59,7 @@ const Login = () => {
                                 </a>
                             </div>
                         </div>
-                        <div className="">
+                        <div>
                             <button type="submit" className="w-full py-2.5 px-4 text-base font-semibold rounded-md text-white bg-[#ff9505]">
                                 Log in
                             </button>
@@ -40,7 +67,7 @@ const Login = () => {
                     </form>
                     <p className="my-2 text-sm text-gray-400 text-center">or continue with</p>
                     <div className="space-x-8 flex justify-center">
-                        <button type="button"
+                        <button
                             className="border-none outline-none">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30px" className="inline" viewBox="0 0 512 512">
                                 <path fill="#fbbd00"
@@ -63,7 +90,7 @@ const Login = () => {
                                     data-original="#eb4132" />
                             </svg>
                         </button>
-                        <button type="button"
+                        <button
                             className="border-none outline-none">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30px" fill="#007bff" viewBox="0 0 167.657 167.657">
                                 <path d="M83.829.349C37.532.349 0 37.881 0 84.178c0 41.523 30.222 75.911 69.848 82.57v-65.081H49.626v-23.42h20.222V60.978c0-20.037 12.238-30.956 30.115-30.956 8.562 0 15.92.638 18.056.919v20.944l-12.399.006c-9.72 0-11.594 4.618-11.594 11.397v14.947h23.193l-3.025 23.42H94.026v65.653c41.476-5.048 73.631-40.312 73.631-83.154 0-46.273-37.532-83.805-83.828-83.805z" data-original="#010002"></path>

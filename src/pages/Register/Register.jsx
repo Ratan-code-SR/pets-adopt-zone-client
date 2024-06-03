@@ -1,9 +1,24 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false)
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm()
+    const onSubmit = (data) => {
+        const name = data.name;
+        const email = data.email;
+        const password = data.password;
+        const photo = 'hello';
+        const userInfo = { name, email, password, photo }
+        console.log(userInfo);
+        reset()
+    }
     return (
         <div className="font-[sans-serif] bg-white text-[#333] ">
             <div className="grid md:grid-cols-2 items-center gap-8 h-full">
@@ -15,7 +30,7 @@ const Register = () => {
                     />
                 </div>
                 <div className="flex items-center p-6 h-full w-full">
-                    <form className="max-w-lg w-full mx-auto">
+                    <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg w-full mx-auto">
                         <div className="mb-12">
                             <h3 className="text-[#ff9505] md:text-3xl text-2xl font-extrabold max-md:text-center">
                                 Create an account
@@ -25,9 +40,9 @@ const Register = () => {
                             <label className="text-xs block mb-2">Full Name</label>
                             <div className="relative flex items-center">
                                 <input
+                                    {...register("name", { required: true })}
                                     name="name"
                                     type="text"
-                                    required
                                     className="w-full bg-transparent text-sm border-b border-gray-300 focus:border-blue-500 px-2 py-3 outline-none"
                                     placeholder="Enter name"
                                 />
@@ -42,14 +57,15 @@ const Register = () => {
                                     <path d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z" />
                                 </svg>
                             </div>
+                            {errors.name && <small className="text-red-400">This field is required</small>}
                         </div>
                         <div className="mt-5">
                             <label className="text-xs block mb-2">Email</label>
                             <div className="relative flex items-center">
                                 <input
+                                    {...register("email", { required: true })}
                                     name="email"
                                     type="text"
-                                    required
                                     className="w-full bg-transparent text-sm border-b border-gray-300 focus:border-blue-500 px-2 py-3 outline-none"
                                     placeholder="Enter email"
                                 />
@@ -72,23 +88,28 @@ const Register = () => {
                                     </g>
                                 </svg>
                             </div>
+                            {errors.email && <small className="text-red-400">This field is required</small>}
                         </div>
                         <div className="mt-5">
                             <label className="text-xs block mb-2">Password</label>
                             <div className="relative flex items-center">
                                 <input
+                                    {...register("password", { required: true })}
                                     name="password"
                                     type={`${showPassword ? "text" : "password"}`}
-                                    required
                                     className="w-full bg-transparent text-sm border-b border-gray-300 focus:border-blue-500 px-2 py-3 outline-none"
                                     placeholder="Enter password"
                                 />
                                 <span onClick={() => setShowPassword(!showPassword)} className='absolute right-2'>{showPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}</span>
                             </div>
+                            {errors.password && <small className="text-red-400">This field is required</small>}
                         </div>
                         <div className="mt-3">
-                            <input type="file" className="" />
+                            <input
+                                {...register("file", { required: true })}
+                                type="file" className="" />
                         </div>
+                        {errors.file && <small className="text-red-400">This field is required</small>}
                         <div className="mt-5">
                             <button
                                 type="submit"
@@ -104,12 +125,9 @@ const Register = () => {
                             </Link>
                         </p>
                     </form>
-
                 </div>
-
             </div>
         </div>
-
     );
 };
 
