@@ -1,8 +1,20 @@
-import { NavLink,Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import logo from '../../assets/logo/logo.png'
 import { FaPhone } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
+import useAuth from '../../Hooks/useAuth';
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import defaultProfile from '../../assets/defaultProfile/defaultProfile.jpg'
 const Navbar = () => {
+    const { user, logOut } = useAuth()
+    const handleLogOut = () => {
+        logOut()
+            .then(result => {
+                console.log(result);
+                toast.success("user logout successfully")
+            })
+    }
     const navLinks = <>
         <NavLink to='/'><li className='ml-5 text-[15px] font-bold'>Home</li></NavLink>
         <li className='ml-5 text-[15px] font-bold'>Pet Listing</li>
@@ -51,20 +63,21 @@ const Navbar = () => {
                     <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
-                                <img alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                <img src={user?.photoURL || defaultProfile} />
                             </div>
                         </div>
-                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                        {user && <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                             <li>
                                 <a className="justify-between">
                                     Profile
                                     <span className="badge">New</span>
                                 </a>
                             </li>
-                            <li><a>Settings</a></li>
-                            <li><a>Logout</a></li>
-                        </ul>
+                            <li><Link to='dashboard'>Dashboard</Link></li>
+                            <li><a onClick={handleLogOut}>Logout</a></li>
+                        </ul>}
                     </div>
+                    <ToastContainer />
                 </div>
             </div>
         </nav>

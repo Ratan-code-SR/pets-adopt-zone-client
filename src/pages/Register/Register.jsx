@@ -6,6 +6,7 @@ import useAuth from '../../Hooks/useAuth'
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false)
     const {
@@ -24,26 +25,22 @@ const Register = () => {
         const imageFile = new FormData();
         const image = data.file[0]
         imageFile.append("image", image);
-
-        const res = await axiosPublic.post(image_hosting_api, imageFile, {
+        const res = await axios.post(image_hosting_api, imageFile, {
             headers: {
                 "content-type": "multipart/form-data",
             }
         })
         if (res.data.success) {
-            console.log(data);
             const name = data.name;
             const email = data.email;
             const password = data.password;
             const photo = res.data.data.display_url
-            // const userInfo = { name, email, password, photo }
-            // console.log(userInfo);
             signUpUser(email, password)
                 .then(result => {
                     console.log(result);
                     userProfileUpdated(name, photo)
                         .then(() => {
-                            const userInfo = { name,email}
+                            const userInfo = { name, email, photo }
                             axiosPublic.post("/users", userInfo)
                                 .then(res => {
                                     if (res.data.insertedId) {
@@ -63,6 +60,8 @@ const Register = () => {
             reset()
         }
     }
+
+
     return (
         <div className="font-[sans-serif] bg-white text-[#333] ">
             <div className="grid md:grid-cols-2 items-center gap-8 h-full">

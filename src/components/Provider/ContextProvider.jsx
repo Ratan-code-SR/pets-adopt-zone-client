@@ -2,11 +2,12 @@ import { createContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types'; // ES6
 import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 export const AuthContext = createContext()
 const ContextProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState(null)
-
+    const axiosPublic = useAxiosPublic()
     // email password register 
     const signUpUser = (email, password) => {
         setLoading(true)
@@ -43,28 +44,29 @@ const ContextProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribed = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser)
-            // const userInfo = { email: currentUser.email }
-            // if (currentUser) {
-            //     axiosPublic.post('/jwt', userInfo)
-            //         .then(res => {
-            //             if (res.data.token) {
-            //                 localStorage.setItem("access-token", res.data.token)
-            //             }
-            //         })
-            // } else {
-            //     // hello
-            //     localStorage.removeItem('access-token')
-            // }
+            const userInfo = { email: currentUser.email }
+            if (currentUser) {
+                axiosPublic.post('/jwt', userInfo)
+                    .then(res => {
+                        if (res.data.token) {
+                            localStorage.setItem("access-token", res.data.token)
+                        }
+                    })
+            } else {
+                // hello
+                localStorage.removeItem('access-token')
+            }
             setLoading(false)
         })
         return () => {
             return unsubscribed()
         }
-    }, [])
+    }, [axiosPublic])
 
     const info = {
         loading,
         user,
+        setUser,
         setLoading,
         signInGoogle,
         signUpUser,

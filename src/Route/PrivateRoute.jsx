@@ -1,7 +1,9 @@
-
+import { useContext } from "react";
+import { Navigate } from "react-router-dom";
+import { AuthContext } from "../components/Provider/ContextProvider";
+import PropTypes from "prop-types";
 
 const PrivateRoute = ({ children }) => {
-
     const { user, loading } = useContext(AuthContext)
     if (loading) {
         return <>
@@ -10,7 +12,6 @@ const PrivateRoute = ({ children }) => {
             </div>
         </>
     }
-    
     if (user) {
         return children;
     }
@@ -18,4 +19,7 @@ const PrivateRoute = ({ children }) => {
 
 };
 
+PrivateRoute.propTypes = {
+    children: PropTypes.node.isRequired
+};
 export default PrivateRoute;

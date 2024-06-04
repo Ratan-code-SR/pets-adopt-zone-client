@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from '../../Hooks/useAuth';
-import { toast } from "react-toastify";
+import { toast,ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
@@ -39,12 +40,19 @@ const Login = () => {
             .then(result => {
                 const userInfo = {
                     name: result.user?.displayName,
-                    email: result.user?.email
+                    email: result.user?.email,
+                    photo: result.user?.photoURL
                 }
                 axiosPublic.post("/users", userInfo)
                     .then(res => {
                         console.log(res.data);
                         toast.success("google login successfully!!!")
+                        if (result) {
+                            setTimeout(() => {
+                                navigate(location?.state ? location.state : "/")
+                            }, 1000);
+                        }
+                      
                         navigate(location.state?.from?.pathname || "/")
                     })
 
@@ -131,6 +139,7 @@ const Login = () => {
                             </svg>
                         </button>
                     </div>
+                    <ToastContainer/>
                     <p className="text-sm mt-3 text-center">Do not have an account <Link to='/register' className="text-[#1E2772] hover:underline ml-1 whitespace-nowrap">Register here</Link></p>
                 </div>
             </div>
