@@ -58,7 +58,7 @@ const Dashboard = () => {
                                             <NavLink to='/dashboard/cart'><span className="text-2xl"><FaShoppingCart /></span>Adoption Request</NavLink>
                                         </li>
                                         <li className="text-md font-bold uppercase">
-                                            <NavLink to='/dashboard/eireu'><span className="text-2xl"><MdOutlineCreateNewFolder /></span>Create Donation Campaign</NavLink>
+                                            <NavLink to='/dashboard/crateDonationCampaign'><span className="text-2xl"><MdOutlineCreateNewFolder /></span>Create Donation Campaign</NavLink>
                                         </li>
                                         <li className="text-md font-bold uppercase">
                                             <NavLink to='/dashboard/dkfdj'><span className="text-2xl"><PiUsersFourFill /></span>My Donation Campaigns </NavLink>

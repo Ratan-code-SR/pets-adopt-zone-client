@@ -11,6 +11,7 @@ import AddPets from '../pages/Dashboard/UserDashboard/AddPets.jsx';
 import MyAddedPets from '../pages/Dashboard/UserDashboard/MyAddedPets.jsx';
 import MyDonations from '../pages/Dashboard/UserDashboard/MyDonations.jsx';
 import UpdatePets from '../pages/Dashboard/UserDashboard/UpdatePets.jsx';
+import CreateDonationCampaigns from '../pages/Dashboard/UserDashboard/CreateDonationCampaigns.jsx';
 const router = createBrowserRouter([
     {
         path: "/",
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
             {
                 path: 'updatePet/:id',
                 element: <UpdatePets />
+            },
+            {
+                path: 'crateDonationCampaign',
+                element: <CreateDonationCampaigns />
             }
 
         ]
