@@ -20,7 +20,6 @@ const Register = () => {
     const { signUpUser, userProfileUpdated, setUser, user } = useAuth()
     const imageBB_hosting_key = import.meta.env.VITE_imgBB_add_api_key;
     const image_hosting_api = `https://api.imgbb.com/1/upload?key=${imageBB_hosting_key}`;
-
     const onSubmit = async (data) => {
         const imageFile = new FormData();
         const image = data.file[0]
@@ -45,14 +44,11 @@ const Register = () => {
                                 .then(res => {
                                     if (res.data.insertedId) {
                                         setUser({ ...user, photoURL: photo, displayName: name })
-                                        toast.success("user account create successfully!!")
                                     }
                                 })
-
                             navigate(location?.state ? location.state : "/")
                         })
-
-
+                    toast.success("user account create successfully!!")
                 })
                 .catch(error => {
                     toast.error(error.message)
@@ -60,8 +56,6 @@ const Register = () => {
             reset()
         }
     }
-
-
     return (
         <div className="font-[sans-serif] bg-white text-[#333] ">
             <div className="grid md:grid-cols-2 items-center gap-8 h-full">

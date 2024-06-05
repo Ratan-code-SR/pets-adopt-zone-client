@@ -25,7 +25,7 @@ const Dashboard = () => {
                 <div className="drawer-side">
                     <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
                     <ul className="min-h-full bg-base-200 text-base-content">
-                        <div className="w-64 min-h-screen bg-[#ff9505]">
+                        <div className="w-64 min-h-screen bg-[#96875d]">
                             <ul className="menu p-4 text-[#1e4272]">
                                 {
                                     isAdmin ?
@@ -48,23 +48,23 @@ const Dashboard = () => {
                                             <NavLink to='/dashboard/userHome'><span className="text-2xl"><IoMdHome /></span>User Home</NavLink>
                                         </li>
                                         <li className="text-md font-bold uppercase">
-                                            <NavLink to='/dashboard/reservation'><span className="text-2xl"><IoIosAddCircle /></span>Add Pet</NavLink>
+                                            <NavLink to='/dashboard/addPet'><span className="text-2xl"><IoIosAddCircle /></span>Add Pet</NavLink>
                                         </li>
 
                                         <li className="text-md font-bold uppercase">
-                                            <NavLink to='/dashboard/payment-history '><span className="text-2xl"><VscGitPullRequestGoToChanges/></span>My added pets </NavLink>
+                                            <NavLink to='/dashboard/myAddPets'><span className="text-2xl"><VscGitPullRequestGoToChanges/></span>My added pets </NavLink>
                                         </li>
                                         <li className="text-md font-bold uppercase">
                                             <NavLink to='/dashboard/cart'><span className="text-2xl"><FaShoppingCart /></span>Adoption Request</NavLink>
                                         </li>
                                         <li className="text-md font-bold uppercase">
-                                            <NavLink to='/dashboard/add_review '><span className="text-2xl"><MdOutlineCreateNewFolder /></span>Create Donation Campaign</NavLink>
+                                            <NavLink to='/dashboard/eireu'><span className="text-2xl"><MdOutlineCreateNewFolder /></span>Create Donation Campaign</NavLink>
                                         </li>
                                         <li className="text-md font-bold uppercase">
-                                            <NavLink to='/dashboard/my_booking  '><span className="text-2xl"><PiUsersFourFill /></span>My Donation Campaigns </NavLink>
+                                            <NavLink to='/dashboard/dkfdj'><span className="text-2xl"><PiUsersFourFill /></span>My Donation Campaigns </NavLink>
                                         </li>
                                         <li className="text-md font-bold uppercase">
-                                            <NavLink to='/dashboard/my_booking  '><span className="text-2xl"><BiDonateBlood /></span>My Donations </NavLink>
+                                            <NavLink to='/dashboard/myDonated'><span className="text-2xl"><BiDonateBlood /></span>My Donations </NavLink>
                                         </li>
                                     </>
                                 }

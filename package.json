@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.40.0",
+    "@tiptap/pm": "^2.4.0",
+    "@tiptap/react": "^2.4.0",
+    "@tiptap/starter-kit": "^2.4.0",
     "axios": "^1.7.2",
     "firebase": "^10.12.2",
     "localforage": "^1.10.0",
@@ -20,6 +23,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.5",
     "react-router-dom": "^6.23.0",
+    "react-select": "^5.8.0",
     "react-tabs": "^6.0.2",
     "react-toastify": "^10.0.5",
     "sort-by": "^1.2.0",

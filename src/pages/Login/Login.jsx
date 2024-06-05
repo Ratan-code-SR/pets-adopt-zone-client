@@ -3,8 +3,7 @@ import { useForm } from "react-hook-form";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from '../../Hooks/useAuth';
-import { toast,ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import { toast} from "react-toastify";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
@@ -14,7 +13,7 @@ const Login = () => {
         reset,
         formState: { errors },
     } = useForm()
-    const { loginUser,signInGoogle } = useAuth()
+    const { loginUser, signInGoogle } = useAuth()
     const navigate = useNavigate()
     const axiosPublic = useAxiosPublic()
 
@@ -23,13 +22,10 @@ const Login = () => {
         const password = data.password;
         loginUser(email, password)
             .then(result => {
-                console.log(result);
-                toast.success("user login successfully!!")
+                toast.success("login successfully!")
                 navigate(location.state?.from?.pathname || "/")
-                reset()
             })
             .catch(error => {
-                console.log(error.message);
                 toast.error(error.message)
             })
         reset()
@@ -46,16 +42,12 @@ const Login = () => {
                 axiosPublic.post("/users", userInfo)
                     .then(res => {
                         console.log(res.data);
-                        toast.success("google login successfully!!!")
-                        if (result) {
-                            setTimeout(() => {
-                                navigate(location?.state ? location.state : "/")
-                            }, 1000);
-                        }
-                      
                         navigate(location.state?.from?.pathname || "/")
                     })
-
+                toast.success("google login successfully!!!")
+            })
+            .catch(error => {
+                toast.error(error.message)
             })
     }
 
@@ -139,7 +131,6 @@ const Login = () => {
                             </svg>
                         </button>
                     </div>
-                    <ToastContainer/>
                     <p className="text-sm mt-3 text-center">Do not have an account <Link to='/register' className="text-[#1E2772] hover:underline ml-1 whitespace-nowrap">Register here</Link></p>
                 </div>
             </div>
