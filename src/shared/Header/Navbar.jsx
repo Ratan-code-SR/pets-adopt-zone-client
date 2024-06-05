@@ -6,8 +6,11 @@ import useAuth from '../../Hooks/useAuth';
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import defaultProfile from '../../assets/defaultProfile/defaultProfile.jpg'
+import useAdmin from '../../Hooks/useAdmin';
 const Navbar = () => {
     const { user, logOut } = useAuth()
+    const [isAdmin] = useAdmin()
+    console.log(isAdmin);
     const handleLogOut = () => {
         logOut()
             .then(result => {
@@ -73,7 +76,7 @@ const Navbar = () => {
                                     <span className="badge">New</span>
                                 </a>
                             </li>
-                            <li><Link to='dashboard'>Dashboard</Link></li>
+                            <li><Link to={`${isAdmin? 'dashboard/adminHome' : 'dashboard/userHome' }`}>Dashboard</Link></li>
                             <li><a onClick={handleLogOut}>Logout</a></li>
                         </ul>}
                     </div>

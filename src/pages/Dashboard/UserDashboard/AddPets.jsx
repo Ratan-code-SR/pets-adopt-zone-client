@@ -46,7 +46,7 @@ const AddPets = () => {
             const age = data.age;
             const date = `${day}-${month}-${year}`;
             const time = `${hours}:${minutes}:${seconds}`;
-            const adopted = false;
+            const adopted = 'false';
             const description = data.description;
             const longDescription = data.longDescription;
             const category = selectedOption.value;

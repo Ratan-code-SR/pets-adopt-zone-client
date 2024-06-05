@@ -72,11 +72,11 @@ const Users = () => {
             <Title subHeading={'Your Users'} heading={'manage all users'} />
             <div className="overflow-x-auto border p-5 my-5 shadow-lg">
                 <div>
-                    <p className="text-3xl font-bold my-3">Total User: {data.length}</p>
+                    <p className="text-3xl font-bold my-3 text-blue-600">Total User: {data.length}</p>
                 </div>
                 <table className="table">
                     {/* head */}
-                    <thead className="bg-orange-400 text-white">
+                    <thead className="bg-[#96875d] text-white">
                         <tr>
                             <th></th>
                             <th>Profile</th>

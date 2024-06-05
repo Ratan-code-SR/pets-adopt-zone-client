@@ -12,6 +12,8 @@ import MyAddedPets from '../pages/Dashboard/UserDashboard/MyAddedPets.jsx';
 import MyDonations from '../pages/Dashboard/UserDashboard/MyDonations.jsx';
 import UpdatePets from '../pages/Dashboard/UserDashboard/UpdatePets.jsx';
 import CreateDonationCampaigns from '../pages/Dashboard/UserDashboard/CreateDonationCampaigns.jsx';
+import AllPets from '../pages/Dashboard/AdminDashboard/AllPets.jsx';
+import UserHome from '../pages/Dashboard/UserDashboard/UserHome.jsx';
 const router = createBrowserRouter([
     {
         path: "/",
@@ -44,6 +46,14 @@ const router = createBrowserRouter([
             {
                 path: 'adminHome',
                 element: <AdminHome />
+            },
+            {
+                path: "allPets",
+                element: <AllPets />
+            },
+            {
+                path: "userHome",
+                element: <UserHome />
             },
             {
                 path: 'allDonations',

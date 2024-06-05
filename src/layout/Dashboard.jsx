@@ -1,10 +1,10 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { IoMdHome,IoIosAddCircle } from "react-icons/io";
+import { IoMdHome, IoIosAddCircle } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoMenuSharp } from "react-icons/io5";
-import { BiDonateHeart,BiDonateBlood} from "react-icons/bi";
-import { PiUsersThreeBold,PiUsersFourFill } from "react-icons/pi";
-import { MdDashboard,MdOutlineCreateNewFolder,MdOutlinePets} from "react-icons/md";
+import { BiDonateHeart, BiDonateBlood } from "react-icons/bi";
+import { PiUsersThreeBold, PiUsersFourFill } from "react-icons/pi";
+import {  MdOutlineCreateNewFolder, MdOutlinePets } from "react-icons/md";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import useAdmin from "../Hooks/useAdmin";
 const Dashboard = () => {
@@ -14,35 +14,25 @@ const Dashboard = () => {
     }
     // const isAdmin = false;
     return (
-        <div className="p-2">
-            {/* side bar */}
-            <div className="drawer z-40">
-                <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content">
-                    {/* Page content here */}
-                    <label htmlFor="my-drawer" className="drawer-button text-4xl"><span className="text-[#ff9505]"><MdDashboard /></span></label>
-                </div>
-                <div className="drawer-side">
-                    <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-                    <ul className="min-h-full bg-base-200 text-base-content">
-                        <div className="w-64 min-h-screen bg-[#96875d]">
-                            <ul className="menu p-4 text-[#1e4272]">
-                                {
-                                    isAdmin ?
-                                     <>
+        <div className="flex">
+                    <div className="w-96 min-h-screen bg-[#96875d] ">
+                        <ul className="menu p-4 text-[#1e4272]">
+                            {
+                                isAdmin ?
+                                    <>
                                         <li className="text-md font-bold uppercase">
-                                            <NavLink to='/dashboard/userHome'><span className="text-2xl"><IoMdHome /></span>Admin Home</NavLink>
+                                            <NavLink to='/dashboard/adminHome'><span className="text-2xl"><IoMdHome /></span>Admin Home</NavLink>
                                         </li>
                                         <li className="text-md font-bold uppercase">
                                             <NavLink to='/dashboard/users'><span className="text-2xl"><PiUsersThreeBold /></span>All Users</NavLink>
                                         </li>
                                         <li className="text-md font-bold uppercase">
-                                            <NavLink to='/dashboard/pets'><span className="text-2xl"><MdOutlinePets /></span>All Pets</NavLink>
+                                            <NavLink to='/dashboard/allPets'><span className="text-2xl"><MdOutlinePets /></span>All Pets</NavLink>
                                         </li>
                                         <li className="text-md font-bold uppercase">
                                             <NavLink to='/dashboard/pets'><span className="text-2xl"><BiDonateHeart /></span>All Donates</NavLink>
                                         </li>
-                                    </> : 
+                                    </> :
                                     <>
                                         <li className="text-md font-bold uppercase">
                                             <NavLink to='/dashboard/userHome'><span className="text-2xl"><IoMdHome /></span>User Home</NavLink>
@@ -52,7 +42,7 @@ const Dashboard = () => {
                                         </li>
 
                                         <li className="text-md font-bold uppercase">
-                                            <NavLink to='/dashboard/myAddPets'><span className="text-2xl"><VscGitPullRequestGoToChanges/></span>My added pets </NavLink>
+                                            <NavLink to='/dashboard/myAddPets'><span className="text-2xl"><VscGitPullRequestGoToChanges /></span>My added pets </NavLink>
                                         </li>
                                         <li className="text-md font-bold uppercase">
                                             <NavLink to='/dashboard/cart'><span className="text-2xl"><FaShoppingCart /></span>Adoption Request</NavLink>
@@ -67,25 +57,23 @@ const Dashboard = () => {
                                             <NavLink to='/dashboard/myDonated'><span className="text-2xl"><BiDonateBlood /></span>My Donations </NavLink>
                                         </li>
                                     </>
-                                }
-                                <div className="divider"></div>
+                            }
+                            <div className="divider"></div>
 
-                                <li className="text-md font-bold uppercase">
-                                    <NavLink to='/'><span className="text-2xl"><IoMdHome /></span>Home </NavLink>
-                                </li>
-                                <li className="text-md font-bold uppercase">
-                                    <NavLink to='/menu'><span className="text-2xl"><IoMenuSharp /></span>Menu </NavLink>
-                                </li>
-                            </ul>
-                        </div>
-                    </ul>
-                </div>
+                            <li className="text-md font-bold uppercase">
+                                <NavLink to='/'><span className="text-2xl"><IoMdHome /></span>Home </NavLink>
+                            </li>
+                            <li className="text-md font-bold uppercase">
+                                <NavLink to='/menu'><span className="text-2xl"><IoMenuSharp /></span>Menu </NavLink>
+                            </li>
+                        </ul>   
             </div>
-            <div className="z-10" >
+
+            <div className="z-10 w-full" >
                 <Outlet />
             </div>
         </div>
-       
+
     );
 };
 
