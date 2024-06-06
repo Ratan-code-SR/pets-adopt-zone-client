@@ -14,6 +14,8 @@ import UpdatePets from '../pages/Dashboard/UserDashboard/UpdatePets.jsx';
 import CreateDonationCampaigns from '../pages/Dashboard/UserDashboard/CreateDonationCampaigns.jsx';
 import AllPets from '../pages/Dashboard/AdminDashboard/AllPets.jsx';
 import UserHome from '../pages/Dashboard/UserDashboard/UserHome.jsx';
+import PrivateRoute from '../Route/PrivateRoute.jsx'
+import MyDonationsCampaigns from '../pages/Dashboard/UserDashboard/MyDonationsCampaigns.jsx';
 const router = createBrowserRouter([
     {
         path: "/",
@@ -45,26 +47,26 @@ const router = createBrowserRouter([
             },
             {
                 path: 'adminHome',
-                element: <AdminHome />
+                element: <AdminRoute><AdminHome /></AdminRoute>
             },
             {
                 path: "allPets",
-                element: <AllPets />
+                element: <AdminRoute><AllPets /></AdminRoute>
             },
             {
                 path: "userHome",
-                element: <UserHome />
+                element:<PrivateRoute><UserHome /></PrivateRoute>
             },
             {
                 path: 'allDonations',
             },
             {
                 path: "addPet",
-                element: <AddPets />
+                element:<PrivateRoute> <AddPets /></PrivateRoute>
             },
             {
                 path: 'myAddPets',
-                element: <MyAddedPets />
+                element:<PrivateRoute> <MyAddedPets /></PrivateRoute>
             },
             {
                 path: 'myDonated',
@@ -72,11 +74,17 @@ const router = createBrowserRouter([
             },
             {
                 path: 'updatePet/:id',
-                element: <UpdatePets />
+                element: <PrivateRoute><UpdatePets /></PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/pets/${params.id}`)
+
             },
             {
                 path: 'crateDonationCampaign',
                 element: <CreateDonationCampaigns />
+            },
+            {
+                path:'myDonationCampaign',
+                element:<MyDonationsCampaigns/>
             }
 
         ]

@@ -80,7 +80,7 @@ const Dashboard = () => {
                                                     <NavLink to='/dashboard/crateDonationCampaign'><span className="text-2xl"><MdOutlineCreateNewFolder /></span>Create Donation Campaign</NavLink>
                                                 </li>
                                                 <li className="text-md font-bold uppercase">
-                                                    <NavLink to='/dashboard/dkfdj'><span className="text-2xl"><PiUsersFourFill /></span>My Donation Campaigns </NavLink>
+                                                    <NavLink to='/dashboard/myDonationCampaign'><span className="text-2xl"><PiUsersFourFill /></span>My Donation Campaigns </NavLink>
                                                 </li>
                                                 <li className="text-md font-bold uppercase">
                                                     <NavLink to='/dashboard/myDonated'><span className="text-2xl"><BiDonateBlood /></span>My Donations </NavLink>

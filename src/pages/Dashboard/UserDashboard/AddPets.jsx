@@ -4,8 +4,10 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useAuth from "../../../Hooks/useAuth";
 const AddPets = () => {
     const [selectedOption, setSelectedOption] = useState(null);
+    const {user} = useAuth()
     const options = [
         { value: 'dog', label: 'Dog' },
         { value: 'cat', label: 'Cat' },
@@ -50,7 +52,8 @@ const AddPets = () => {
             const description = data.description;
             const longDescription = data.longDescription;
             const category = selectedOption.value;
-            const petInfo = { petImage, date, time, adopted, name, location, age, description, longDescription, category }
+            const email = user.email;
+            const petInfo = { petImage, date, time, email, adopted, name, location, age, description, longDescription, category }
             const petsData = await axiosSecure.post("/pets", petInfo)
             if (petsData.data.insertedId) {
                 Swal.fire({
@@ -68,10 +71,10 @@ const AddPets = () => {
         <div>
             <div className="font-sans text-#333">
                 <div className="text-center bg-gradient-to-r from-blue-800 to-blue-400 min-h-[160px] sm:p-6 p-4">
-                    <h4 className="sm:text-3xl text-2xl font-bold text-white">Create your free account</h4>
+                    <h4 className="sm:text-3xl text-2xl font-bold text-white">Add your Pet</h4>
                 </div>
                 <div className="mx-4 mb-4 -mt-16">
-                    <form onSubmit={handleSubmit(onSubmit)} className="max-w-4xl mx-auto bg-white shadow-0_2px_18px_-3px_rgba(6,81,237,0.4) sm:p-8 p-4 rounded-md">
+                    <form onSubmit={handleSubmit(onSubmit)} className="max-w-4xl border-2 border-t-0 mx-auto bg-white shadow-0_2px_18px_-3px_rgba(6,81,237,0.4) sm:p-8 p-4 rounded-md">
                         <div
                             className="my-7 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
                         </div>

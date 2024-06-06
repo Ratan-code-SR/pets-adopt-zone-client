@@ -3,8 +3,10 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useAuth from "../../../Hooks/useAuth";
 const CreateDonationCampaigns = () => {
     const axiosSecure = useAxiosSecure()
+    const {user} = useAuth()
     const {
         register,
         handleSubmit,
@@ -27,13 +29,14 @@ const CreateDonationCampaigns = () => {
             const shortDescription = data.shortDescription;
             const longDescription = data.longDescription;
             const date = data.date;
+            const email = user.email;
             const maximumDonationAmount = data.maximumAmount
-            const donationCampaignInfo = { petImage, shortDescription, longDescription, maximumDonationAmount, date }
+            const donationCampaignInfo = { petImage,email, shortDescription, longDescription, maximumDonationAmount, date }
             const petsData = await axiosSecure.post("/donations", donationCampaignInfo)
             if (petsData.data.insertedId) {
                 Swal.fire({
                     icon: "success",
-                    title: `Your ${data.name} has been saved`,
+                    title: `Your ${data.name} has been added`,
                     showConfirmButton: false,
                     timer: 1500
                 });

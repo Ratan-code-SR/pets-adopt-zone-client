@@ -6,6 +6,7 @@ import { FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { Link } from "react-router-dom";
 const AllPets = () => {
     const axiosSecure = useAxiosSecure()
     const { data, isLoading, refetch } = useQuery({
@@ -26,7 +27,7 @@ const AllPets = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.delete(`/pets/owner/${id}`)
+                axiosSecure.delete(`/pets/${id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             Swal.fire({
@@ -40,31 +41,31 @@ const AllPets = () => {
             }
         });
     }
-    const handleUpdate = id => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axiosSecure.patch(`/pets/owner/${id}`)
-                    .then(res => {
-                        if (res.data.deletedCount > 0) {
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: "Your file has been deleted.",
-                                icon: "success"
-                            });
-                        }
-                        refetch()
-                    })
-            }
-        });
-    }
+    // const handleUpdate = id => {
+    //     Swal.fire({
+    //         title: "Are you sure?",
+    //         text: "You won't be able to revert this!",
+    //         icon: "warning",
+    //         showCancelButton: true,
+    //         confirmButtonColor: "#3085d6",
+    //         cancelButtonColor: "#d33",
+    //         confirmButtonText: "Yes, delete it!"
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             axiosSecure.patch(`/pets/owner/${id}`)
+    //                 .then(res => {
+    //                     if (res.data.deletedCount > 0) {
+    //                         Swal.fire({
+    //                             title: "Deleted!",
+    //                             text: "Your file has been deleted.",
+    //                             icon: "success"
+    //                         });
+    //                     }
+    //                     refetch()
+    //                 })
+    //         }
+    //     });
+    // }
     console.log(data);
     if (isLoading) {
         return <div>
@@ -110,7 +111,7 @@ const AllPets = () => {
                                     <button>{pet.adopted}</button>
                                 </td>
                                 <td className="flex gap-2">
-                                    <button onClick={() => handleUpdate(pet?._id)} className="text-md text-white  p-1 bg-orange-500 rounded-md"><FaEdit /></button>
+                                  <Link to={`/dashboard/updatePet/${pet._id}`}><button className="text-md text-white  p-1 bg-orange-500 rounded-md"><FaEdit /></button></Link>
                                     <button onClick={() => handleDelete(pet?._id)} className="text-md text-white p-1 bg-red-700 rounded-md"><MdDelete /></button>
                                 </td>
                             </tr>
