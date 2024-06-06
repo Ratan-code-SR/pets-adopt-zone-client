@@ -10,7 +10,6 @@ import useAdmin from '../../Hooks/useAdmin';
 const Navbar = () => {
     const { user, logOut } = useAuth()
     const [isAdmin] = useAdmin()
-    console.log(isAdmin);
     const handleLogOut = () => {
         logOut()
             .then(result => {
@@ -62,7 +61,7 @@ const Navbar = () => {
                         {navLinks}
                     </ul>
                 </div>
-                <div className="navbar-end">
+                <div className="navbar-end z-10">
                     <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
@@ -90,3 +89,6 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+

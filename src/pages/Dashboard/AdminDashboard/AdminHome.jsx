@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { FaUsers } from "react-icons/fa";
 import { MdOutlinePets } from "react-icons/md";
 import { GiWallet } from "react-icons/gi";
+import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 const AdminHome = () => {
-    const [user, setUser] = useState([])
+    const [users, setUser] = useState([])
     const [pets, setPets] = useState([])
     const axiosSecure = useAxiosSecure()
-
     useEffect(() => {
         const usersData = async () => {
             const res = await axiosSecure.get('/users')
@@ -24,31 +24,39 @@ const AdminHome = () => {
         usersData()
     }, [axiosSecure])
 
-    console.log(user);
+    console.log(users);
 
     return (
-        <div>
-            <h1>Hi WelCome Back</h1>
-            <div className='flex gap-5 items-center justify-center'>
-                <div className='bg-gradient-to-r from-teal-400 to-yellow-200 flex justify-center items-center gap-5 text-white p-4 rounded-md '>
-                    <p className='text-5xl'><FaUsers /></p>
-                    <div className='text-3xl'>
-                        <p>{user.length}</p>
-                        <p>Users</p>
+        <div className='my-5 px-2'>
+            <div className='lg:grid grid-cols-3 flex flex-col gap-5 items-center justify-center '>
+                <div className='bg-[#fcdbee] w-full justify-center flex  items-center gap-10  text-white p-4  border-b-4 rounded-md border-[#dd2374] '>
+                    <p className='text-3xl bg-[#dd2374] p-2 rounded-full'><FaUsers /></p>
+                    <div className='text-2xl'>
+                        <p className='text-[#3e3a41]'>All Users</p>
+                        <div className='flex items-center gap-5'>
+                            <p className='text-black font-bold'>{users.length}</p>
+                            <span className='text-[#dd2374]'>   < FaArrowRightArrowLeft /></span>
+                        </div>
                     </div>
                 </div>
-                <div className='bg-gradient-to-r from-fuchsia-500 to-cyan-500  flex justify-center items-center gap-5 text-white p-4 rounded-md '>
-                    <p className='text-5xl'><MdOutlinePets /></p>
-                    <div className='text-3xl'>
-                        <p>{pets.length}</p>
-                        <p>All Pets</p>
+                <div className='bg-[#d1e5fe] w-full flex justify-center items-center gap-10  text-white p-4  border-b-4 rounded-md border-[#5046e5] '>
+                    <p className='text-3xl bg-[#5046e5] p-2 rounded-full'><MdOutlinePets /></p>
+                    <div className='text-2xl'>
+                        <p className='text-[#3e3a41]'>All Pets</p>
+                        <div className='flex items-center gap-5'>
+                            <p className='text-black font-bold'>{pets.length}</p>
+                            <span className='text-[#5046e5]'>   < FaArrowRightArrowLeft /></span>
+                        </div>
                     </div>
                 </div>
-                <div className='bg-gradient-to-r from-pink-500 to-rose-500 flex justify-center items-center gap-5 text-white p-4 rounded-md '>
-                    <p className='text-5xl'><GiWallet /></p>
-                    <div className='text-3xl'>
-                        <p>{pets.length}</p>
-                        <p>Donation</p>
+                <div className='bg-[#bef7dc] w-full flex justify-center items-center gap-10  text-white p-4  border-b-4 rounded-md border-[#06996d] '>
+                    <p className='text-3xl bg-[#06996d] p-2 rounded-full'><GiWallet /></p>
+                    <div className='text-2xl'>
+                        <p className='text-[#3e3a41]'> Donations</p>
+                        <div className='flex items-center gap-5'>
+                            <p className='text-black font-bold'>{pets.length}</p>
+                            <span className='text-[#06996d]'>   < FaArrowRightArrowLeft /></span>
+                        </div>
                     </div>
                 </div>
             </div>

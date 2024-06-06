@@ -1,28 +1,52 @@
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import slide1 from '../../../assets/slider/slider1.jpg'
+import slide2 from '../../../assets/slider/slider2.jpg'
+import slide3 from '../../../assets/slider/slider3.jpg'
+import slide4 from '../../../assets/slider/slider4.jpg'
+import slide5 from '../../../assets/slider/slider5.jpg'
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
+// import required modules
+import { Autoplay,  } from 'swiper/modules';
+
 const Banner = () => {
     return (
-        <div>
-            <div className="carousel w-full">
-                <div id="item1" className="carousel-item w-full">
-                    <img src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" className="w-full" />
-                </div>
-                <div id="item2" className="carousel-item w-full">
-                    <img src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.jpg" className="w-full" />
-                </div>
-                <div id="item3" className="carousel-item w-full">
-                    <img src="https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.jpg" className="w-full" />
-                </div>
-                <div id="item4" className="carousel-item w-full">
-                    <img src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.jpg" className="w-full" />
-                </div>
-            </div>
-            <div className="flex justify-center w-full py-2 gap-2">
-                <a href="#item1" className="btn btn-xs">1</a>
-                <a href="#item2" className="btn btn-xs">2</a>
-                <a href="#item3" className="btn btn-xs">3</a>
-                <a href="#item4" className="btn btn-xs">4</a>
-            </div>
-        </div>
+        <>
+            <Swiper
+                spaceBetween={30}
+                centeredSlides={true}
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                }}
+                pagination={{
+                    clickable: true,
+                }}
+                navigation={true}
+                modules={[Autoplay,]}
+                className="mySwiper"
+            >
+                <SwiperSlide>
+                    <img className='w-full h-[250px]' src={slide1} alt="" />
+                </SwiperSlide>
+                <SwiperSlide className='w-full h-[400px]'>
+                    <img className='w-full h-[250px]' src={slide2} alt="" />
+                </SwiperSlide>
+                <SwiperSlide className='w-full h-[400px]'>
+                    <img className='w-full h-[250px]' src={slide3} alt="" />
+                </SwiperSlide>
+                <SwiperSlide className='w-full h-[400px]'>
+                    <img className='w-full h-[250px]' src={slide4} alt="" />
+                </SwiperSlide>
+                <SwiperSlide >
+                    <img className='w-full h-[250px]' src={slide5} alt="" />
+                </SwiperSlide>
+               
+            </Swiper>
+        </>
     );
 };
 

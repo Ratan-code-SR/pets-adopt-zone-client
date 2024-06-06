@@ -5,6 +5,7 @@ import { MdDelete, MdEditSquare } from "react-icons/md";
 import { FaDonate } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 const MyAddedPets = () => {
     const axiosSecure = useAxiosSecure()
     const { data, isLoading, refetch } = useQuery({
@@ -15,7 +16,14 @@ const MyAddedPets = () => {
         }
     })
     if (isLoading) {
-        return <p>loading -----------</p>
+        return <div>
+            <Title subHeading={'Your Pets'} heading={'manage all Pets'} />
+            <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
+                <p>
+                    <Skeleton count={3} />
+                </p>
+            </SkeletonTheme>
+        </div>
     }
     // handle delete your owen pet
     const handleDelete = (id) => {
@@ -78,7 +86,7 @@ const MyAddedPets = () => {
                                 <td>{pet?.category}</td>
                                 <td>{pet?.adopted}</td>
                                 <td>
-                                    <Link to={`/dashboard/updatePet/${pet._id}`}><button className="text-xl text-white p-2 rounded-md bg-red-700"><MdEditSquare/></button></Link>
+                                    <Link to={`/dashboard/updatePet/${pet._id}`}><button className="text-xl text-white p-2 rounded-md bg-red-700"><MdEditSquare /></button></Link>
                                 </td>
                                 <td>
                                     <button className="text-xl text-white p-2 rounded-md bg-red-700"><FaDonate /></button>

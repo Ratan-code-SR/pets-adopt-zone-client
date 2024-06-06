@@ -4,6 +4,7 @@ import { MdDelete } from "react-icons/md";
 import { FaUser } from "react-icons/fa6";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 const Users = () => {
     const axiosSecure = useAxiosSecure()
     const { data, isLoading, refetch } = useQuery({
@@ -65,7 +66,14 @@ const Users = () => {
     }
 
     if (isLoading) {
-        return <p>loading ------------</p>
+        return <div>
+            <Title subHeading={'All Pets'} heading={'manage all Pets'} />
+            <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
+                <p>
+                    <Skeleton count={3} />
+                </p>
+            </SkeletonTheme>
+        </div>
     }
     return (
         <div>

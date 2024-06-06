@@ -5,6 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 const AllPets = () => {
     const axiosSecure = useAxiosSecure()
     const { data, isLoading, refetch } = useQuery({
@@ -64,34 +65,15 @@ const AllPets = () => {
             }
         });
     }
-    // const handleMakeAdmin = id => {
-    //     Swal.fire({
-    //         title: "Are you sure?",
-    //         text: "You won't be able to revert this!",
-    //         icon: "warning",
-    //         showCancelButton: true,
-    //         confirmButtonColor: "#3085d6",
-    //         cancelButtonColor: "#d33",
-    //         confirmButtonText: "Yes, delete it!"
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             axiosSecure.patch(`/users/admin/${id}`)
-    //                 .then(res => {
-    //                     if (res.data.deletedCount > 0) {
-    //                         Swal.fire({
-    //                             title: "Deleted!",
-    //                             text: "Your file has been deleted.",
-    //                             icon: "success"
-    //                         });
-    //                     }
-    //                     refetch()
-    //                 })
-    //         }
-    //     });
-    // }
     console.log(data);
     if (isLoading) {
-        return <p>loading ------------</p>
+        return <div>
+            <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
+                <p>
+                    <Skeleton count={3} />
+                </p>
+            </SkeletonTheme>
+        </div>
     }
     return (
         <div>

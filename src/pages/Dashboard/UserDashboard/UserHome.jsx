@@ -18,7 +18,7 @@ const UserHome = () => {
     return (
         <div>
             <h1>Hi WelCome Back</h1>
-            <div className='flex gap-5 items-center justify-center'>
+            <div className='flex gap-5 items-center '>
                 <div className='bg-gradient-to-r from-teal-400 to-yellow-200 flex justify-center items-center gap-5 text-white p-4 rounded-md '>
                     <p className='text-5xl'><FaUsers /></p>
                     <div className='text-3xl'>
