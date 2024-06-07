@@ -1,16 +1,19 @@
 
-import { useQuery } from "@tanstack/react-query";
-import Title from "../../Title/Title";
-import { MdDelete } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
-import Swal from "sweetalert2";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import { MdEditSquare } from "react-icons/md";
+import { FaRegCirclePause } from "react-icons/fa6";
+import { BiDollar } from "react-icons/bi";
+import { MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 const AllDonations = () => {
     const axiosSecure = useAxiosSecure()
-    const { data, isLoading, refetch } = useQuery({
+    const { data, isLoading ,refetch} = useQuery({
         queryKey: ['donations'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/donations')
+            const res = await axiosSecure.get(`/donations`)
             return res.data;
         }
     })
@@ -25,12 +28,12 @@ const AllDonations = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.delete(`/pets/owner/${id}`)
+                axiosSecure.delete(`/donations/${id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             Swal.fire({
                                 title: "Deleted!",
-                                text: "Your file has been deleted.",
+                                text: "Your data has been deleted.",
                                 icon: "success"
                             });
                         }
@@ -39,104 +42,68 @@ const AllDonations = () => {
             }
         });
     }
-    const handleUpdate = id => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axiosSecure.patch(`/pets/owner/${id}`)
-                    .then(res => {
-                        if (res.data.deletedCount > 0) {
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: "Your file has been deleted.",
-                                icon: "success"
-                            });
-                        }
-                        refetch()
-                    })
-            }
-        });
-    }
-    // const handleMakeAdmin = id => {
-    //     Swal.fire({
-    //         title: "Are you sure?",
-    //         text: "You won't be able to revert this!",
-    //         icon: "warning",
-    //         showCancelButton: true,
-    //         confirmButtonColor: "#3085d6",
-    //         cancelButtonColor: "#d33",
-    //         confirmButtonText: "Yes, delete it!"
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             axiosSecure.patch(`/users/admin/${id}`)
-    //                 .then(res => {
-    //                     if (res.data.deletedCount > 0) {
-    //                         Swal.fire({
-    //                             title: "Deleted!",
-    //                             text: "Your file has been deleted.",
-    //                             icon: "success"
-    //                         });
-    //                     }
-    //                     refetch()
-    //                 })
-    //         }
-    //     });
-    // }
-    console.log(data);
     if (isLoading) {
-        return <p>loading ------------</p>
+        return <div>
+            <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
+                <p>
+                    <Skeleton count={3} />
+                </p>
+            </SkeletonTheme>
+        </div>
     }
+
     return (
         <div>
-            <Title subHeading={'All Pets'} heading={'manage all Pets'} />
-            <div className="overflow-x-auto border p-5 my-5 shadow-lg">
-                <div>
-                    <p className="text-3xl font-bold my-3">Total Pets: {data.length}</p>
-                </div>
-                <table className="table">
-                    {/* head */}
-                    <thead className="bg-[#96875d] text-white">
-                        <tr>
-                            <th>SL</th>
-                            <th>Pet Image</th>
-                            <th>Category</th>
-                            <th>Location</th>
-                            <th>Status</th>
-                            <th>Action</th>
+            {
+                data && data.length > 0 ?
+                    (<div className="overflow-x-auto border p-5 my-5 shadow-lg">
+                        <div>
+                            <p className="text-3xl font-bold my-3 text-blue-500">All Donates:{data.length} </p>
+                        </div>
+                        <table className="table">
+                            {/* head */}
+                            <thead className="bg-[#96875d] text-white">
+                                <tr>
+                                    <th>SL</th>
+                                    <th>Pet Name</th>
+                                    <th>Maximum donation amount</th>
+                                    <th>Actions your campaign</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {/* row 1 */}
+                                {data.map((donation, index) =>
+                                    <tr key={donation._id}>
+                                        <td className="text-xl">{index + 1}</td>
+                                        <td className="text-xl">{donation.petName}</td>
+                                        <td>
+                                            <p className="flex items-center gap-1"> {donation.maximumDonationAmount}  <span className="font-bold"><BiDollar /></span></p>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* row 1 */}
-                        {data.map((pet, index) =>
-                            <tr key={pet._id}>
-                                <td>{index + 1}</td>
-                                <td>
-                                    <img className="w-10 h-10 rounded-md" src={pet?.petImage} alt="" />
-                                </td>
-                                <td>{pet.name}</td>
-                                <td>{pet?.location}</td>
-                                <td >
-                                    {/* {pet.role === 'admin' ? <p className="text-green-400 font-bold">Admin</p> : <button onClick={() => handleMakeAdmin(pet?._id)} className="bg-orange-400 p-2 text-xl text-white rounded-md">{pet.adopted}</button>} */}
-                                    <button>{pet.adopted}</button>
-                                </td>
-                                <td className="flex gap-2">
-                                    <button onClick={() => handleUpdate(pet?._id)} className="text-md text-white  p-1 bg-orange-500 rounded-md"><FaEdit /></button>
-                                    <button onClick={() => handleDelete(pet?._id)} className="text-md text-white p-1 bg-red-700 rounded-md"><MdDelete /></button>
-                                </td>
-                            </tr>
-                        )}
+                                        </td>
+                                        <td className="flex gap-5 items-center text-xl">
+                                            <Link to={`/dashboard/editDonationCampaign/${donation._id}`}>
+                                                <button title="edit" className="bg-[#ff9505] p-2 rounded-full text-white"><MdEditSquare /></button>
+                                            </Link>
+                                            <button
+                                                title="pause"
+                                                className="bg-[#ff9505] p-2 rounded-full text-white"><FaRegCirclePause /></button>
+                                            <button
+                                            onClick={()=>handleDelete(donation._id)}
+                                                title="view donators"
+                                                className="bg-red-500 p-2 rounded-full text-white"><MdDelete /></button>
+                                        </td>
 
-                    </tbody>
-                </table>
-            </div>
+                                    </tr>
+                                )}
+
+                            </tbody>
+                        </table>
+                    </div>)
+                    :
+                    (<h1 className="text-center text-xl my-20"> Not create donation campaign.</h1>)
+
+            }
+
         </div>
     );
 };

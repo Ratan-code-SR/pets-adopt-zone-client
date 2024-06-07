@@ -17,6 +17,7 @@ import UserHome from '../pages/Dashboard/UserDashboard/UserHome.jsx';
 import PrivateRoute from '../Route/PrivateRoute.jsx'
 import MyDonationsCampaigns from '../pages/Dashboard/UserDashboard/MyDonationCampaign/MyDonationsCampaigns.jsx';
 import EditDonationCampaign from '../pages/Dashboard/UserDashboard/MyDonationCampaign/EditDonationCampaign.jsx';
+import AllDonations from '../pages/Dashboard/AdminDashboard/AllDonations.jsx';
 const router = createBrowserRouter([
     {
         path: "/",
@@ -60,6 +61,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'allDonations',
+                element:<AllDonations/>
             },
             {
                 path: "addPet",

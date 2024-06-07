@@ -41,32 +41,6 @@ const AllPets = () => {
             }
         });
     }
-    // const handleUpdate = id => {
-    //     Swal.fire({
-    //         title: "Are you sure?",
-    //         text: "You won't be able to revert this!",
-    //         icon: "warning",
-    //         showCancelButton: true,
-    //         confirmButtonColor: "#3085d6",
-    //         cancelButtonColor: "#d33",
-    //         confirmButtonText: "Yes, delete it!"
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             axiosSecure.patch(`/pets/owner/${id}`)
-    //                 .then(res => {
-    //                     if (res.data.deletedCount > 0) {
-    //                         Swal.fire({
-    //                             title: "Deleted!",
-    //                             text: "Your file has been deleted.",
-    //                             icon: "success"
-    //                         });
-    //                     }
-    //                     refetch()
-    //                 })
-    //         }
-    //     });
-    // }
-    console.log(data);
     if (isLoading) {
         return <div>
             <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
@@ -98,7 +72,7 @@ const AllPets = () => {
                     </thead>
                     <tbody>
                         {/* row 1 */}
-                        {data.map((pet, index) =>
+                        {data?.map((pet, index) =>
                             <tr key={pet._id}>
                                 <td>{index + 1}</td>
                                 <td>

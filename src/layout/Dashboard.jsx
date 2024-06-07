@@ -59,7 +59,7 @@ const Dashboard = () => {
                                                     <NavLink to='/dashboard/allPets'><span className="text-2xl"><MdOutlinePets /></span>All Pets</NavLink>
                                                 </li>
                                                 <li className="text-md font-bold uppercase">
-                                                    <NavLink to='/dashboard/pets'><span className="text-2xl"><BiDonateHeart /></span>All Donates</NavLink>
+                                                    <NavLink to='/dashboard/allDonations'><span className="text-2xl"><BiDonateHeart /></span>All Donates</NavLink>
                                                 </li>
                                             </> :
                                             <>
