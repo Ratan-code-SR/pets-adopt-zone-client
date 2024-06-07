@@ -17,7 +17,7 @@ const MyAddedPets = () => {
             return res.data;
         }
     })
-    console.log(data);
+    // console.log(data);
     if (isLoading) {
         return <div>
             <Title subHeading={'Your Pets'} heading={'manage all Pets'} />

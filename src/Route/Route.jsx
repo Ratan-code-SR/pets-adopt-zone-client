@@ -61,11 +61,11 @@ const router = createBrowserRouter([
             },
             {
                 path: 'allDonations',
-                element:<AllDonations/>
+                element:<AdminRoute><AllDonations/></AdminRoute>
             },
             {
                 path: "addPet",
-                element:<PrivateRoute> <AddPets /></PrivateRoute>
+                element:<PrivateRoute><AddPets /></PrivateRoute>
             },
             {
                 path: 'myAddPets',
@@ -73,7 +73,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'myDonated',
-                element: <MyDonations />
+                element:<PrivateRoute><MyDonations /></PrivateRoute>
             },
             {
                 path: 'updatePet/:id',
@@ -83,19 +83,18 @@ const router = createBrowserRouter([
             },
             {
                 path: 'crateDonationCampaign',
-                element: <CreateDonationCampaigns />
+                element:<PrivateRoute><CreateDonationCampaigns /></PrivateRoute>
             },
             {
                 path:'myDonationCampaign',
-                element:<MyDonationsCampaigns/>
+                element:<PrivateRoute><MyDonationsCampaigns/></PrivateRoute>
             },
             {
                 path:"editDonationCampaign/:id",
-                element:<EditDonationCampaign/>,
+                element:<PrivateRoute><EditDonationCampaign/></PrivateRoute>,
                 loader:({params}) => fetch(`http://localhost:5000/donations/${params.id}`)
 
             }
-
 
         ]
     }

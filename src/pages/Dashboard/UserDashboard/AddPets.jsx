@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
 const AddPets = () => {
     const [selectedOption, setSelectedOption] = useState(null);
-    const {user} = useAuth()
+    const { user } = useAuth()
     const options = [
         { value: 'dog', label: 'Dog' },
         { value: 'cat', label: 'Cat' },
@@ -17,13 +17,6 @@ const AddPets = () => {
     ];
     const axiosSecure = useAxiosSecure()
     const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() + 1;
-    const day = currentDate.getDate();
-    const hours = currentDate.getHours();
-    const minutes = currentDate.getMinutes();
-    const seconds = currentDate.getSeconds();
-
     const {
         register,
         handleSubmit,
@@ -46,19 +39,18 @@ const AddPets = () => {
             const name = data.name;
             const location = data.location;
             const age = data.age;
-            const date = `${day}-${month}-${year}`;
-            const time = `${hours}:${minutes}:${seconds}`;
             const adopted = 'false';
             const description = data.description;
             const longDescription = data.longDescription;
             const category = selectedOption.value;
             const email = user.email;
-            const petInfo = { petImage, date, time, email, adopted, name, location, age, description, longDescription, category }
+            const addedDate = currentDate.toISOString()
+            const petInfo = { petImage, email, adopted, name, location, age, description, longDescription, category,addedDate }
             const petsData = await axiosSecure.post("/pets", petInfo)
             if (petsData.data.insertedId) {
                 Swal.fire({
                     icon: "success",
-                    title: `Your ${data.name} has been saved`,
+                    title: `Your ${category} data has been saved`,
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -104,13 +96,10 @@ const AddPets = () => {
                                 <label className="text-sm mb-2 block">Category</label>
                                 <div className="App">
                                     <Select
-                                        // name="category"
-                                        // {...register("selectedOption", { required: true })}
                                         defaultValue={selectedOption}
                                         onChange={setSelectedOption}
                                         options={options}
                                     />
-                                    {/* {errors.selectedOption && <small className="text-red-500">This field is required</small>} */}
                                 </div>
                             </div>
                             <div>
@@ -126,12 +115,20 @@ const AddPets = () => {
                             <div>
                                 <label className="text-sm mb-2 block">Short Description</label>
                                 <textarea
-                                    {...register("description", { required: true, maxLength: 20 })}
+                                    {...register("description", {
+                                        required: true, maxLength: {
+                                            value: 30,
+                                            message: "Short description must be less than 30 characters"
+                                        }
+                                    })}
                                     name="description"
                                     type="text"
                                     className="bg-gray-100 w-full text-sm px-4 py-3 rounded-md outline-blue-500"
                                     placeholder="Enter short description" />
-                                {errors.description && <small className="text-red-500">This field is required</small>}
+                                {errors.description && <small className="text-red-500">This field is required
+                                    {errors.description.message}
+                                </small>}
+
                             </div>
                             <div>
                                 <label className="text-sm mb-2 block">Long Description</label>
@@ -153,7 +150,7 @@ const AddPets = () => {
                             {errors.file && <small className="text-red-500">This field is required</small>}
                         </div>
                         <div className="!mt-10">
-                            <button type="submit" className="bg-orange-400 text-white font-bold px-5 rounded-md p-2">Submit</button>
+                            <button type="submit" className="bg-orange-400 text-white font-bold px-5 rounded-md p-2 w-full">Add Pet</button>
                         </div>
                     </form>
                 </div>

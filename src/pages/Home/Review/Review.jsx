@@ -22,7 +22,7 @@ const Review = () => {
         }
         reviewData()
     }, [axiosPublic])
-    console.log(reviews);
+    // console.log(reviews);
     return (
         <div>
             <Swiper

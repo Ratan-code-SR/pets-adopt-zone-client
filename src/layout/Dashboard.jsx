@@ -14,7 +14,7 @@ import logo from "../assets/logo/logo.png"
 import useAuth from "../Hooks/useAuth";
 const Dashboard = () => {
     const [isAdmin, isAdminLoading] = useAdmin()
-    const  {user} = useAuth()
+    const { user } = useAuth()
     if (isAdminLoading) {
         return <div>
             <div className="p-4">
@@ -39,13 +39,15 @@ const Dashboard = () => {
                             </label>
                             <img className='w-10 h-10' src={logo} alt="" />
                             <p className='text-xl font-bold'>PetAdoptZone</p>
-
                         </div>
                         <div className="drawer-side z-10 ">
                             <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-                            <ul className="menu p-4 w-80 min-h-full text-base-content bg-base-200 z-10">
-                             
-                                <ul className="menu p-4 text-[#1e4272] z-10 ">
+                            <ul className="menu p-4 lg:w-80 w-56 min-h-full text-base-content bg-base-200 z-10">
+                                <div className=" flex gap-2 items-center">
+                                    <img className='w-10 h-10' src={logo} alt="" />
+                                    <p className='text-xl font-bold'>PetAdoptZone</p>
+                                </div>
+                                <ul className="menu p-4 text-[#1e4272] z-10">
                                     {
                                         isAdmin ?
                                             <>
@@ -69,7 +71,6 @@ const Dashboard = () => {
                                                 <li className="text-md font-bold uppercase">
                                                     <NavLink to='/dashboard/addPet'><span className="text-2xl"><IoIosAddCircle /></span>Add Pet</NavLink>
                                                 </li>
-
                                                 <li className="text-md font-bold uppercase">
                                                     <NavLink to='/dashboard/myAddPets'><span className="text-2xl"><VscGitPullRequestGoToChanges /></span>My added pets </NavLink>
                                                 </li>
@@ -88,7 +89,6 @@ const Dashboard = () => {
                                             </>
                                     }
                                     <div className="divider"></div>
-
                                     <li className="text-md font-bold uppercase">
                                         <NavLink to='/'><span className="text-2xl"><IoMdHome /></span>Home </NavLink>
                                     </li>
@@ -96,7 +96,6 @@ const Dashboard = () => {
                                         <NavLink to='/menu'><span className="text-2xl"><IoMenuSharp /></span>Menu </NavLink>
                                     </li>
                                 </ul>
-
                             </ul>
                         </div>
                     </div>
@@ -119,5 +118,4 @@ const Dashboard = () => {
         </div>
     );
 };
-
 export default Dashboard;

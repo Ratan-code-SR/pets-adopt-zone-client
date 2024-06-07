@@ -63,6 +63,7 @@ const AllPets = () => {
                         <tr>
                             <th>SL</th>
                             <th>Pet Image</th>
+                            <th>Pet Name</th>
                             <th>Category</th>
                             <th>Location</th>
                             <th>Status</th>
@@ -79,6 +80,7 @@ const AllPets = () => {
                                     <img className="w-10 h-10 rounded-md" src={pet?.petImage} alt="" />
                                 </td>
                                 <td>{pet.name}</td>
+                                <td>{pet.category}</td>
                                 <td>{pet?.location}</td>
                                 <td >
                                     {/* {pet.role === 'admin' ? <p className="text-green-400 font-bold">Admin</p> : <button onClick={() => handleMakeAdmin(pet?._id)} className="bg-orange-400 p-2 text-xl text-white rounded-md">{pet.adopted}</button>} */}
