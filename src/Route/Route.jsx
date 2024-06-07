@@ -15,7 +15,8 @@ import CreateDonationCampaigns from '../pages/Dashboard/UserDashboard/CreateDona
 import AllPets from '../pages/Dashboard/AdminDashboard/AllPets.jsx';
 import UserHome from '../pages/Dashboard/UserDashboard/UserHome.jsx';
 import PrivateRoute from '../Route/PrivateRoute.jsx'
-import MyDonationsCampaigns from '../pages/Dashboard/UserDashboard/MyDonationsCampaigns.jsx';
+import MyDonationsCampaigns from '../pages/Dashboard/UserDashboard/MyDonationCampaign/MyDonationsCampaigns.jsx';
+import EditDonationCampaign from '../pages/Dashboard/UserDashboard/MyDonationCampaign/EditDonationCampaign.jsx';
 const router = createBrowserRouter([
     {
         path: "/",
@@ -85,7 +86,14 @@ const router = createBrowserRouter([
             {
                 path:'myDonationCampaign',
                 element:<MyDonationsCampaigns/>
+            },
+            {
+                path:"editDonationCampaign/:id",
+                element:<EditDonationCampaign/>,
+                loader:({params}) => fetch(`http://localhost:5000/donations/${params.id}`)
+
             }
+
 
         ]
     }
