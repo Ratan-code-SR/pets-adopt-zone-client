@@ -6,6 +6,7 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 const Categories = () => {
     const [pets,loading] = usePets()
+    // console.log(pets);
     const dogs = pets?.filter(items => items.category == 'dog')
     const cats = pets?.filter(items => items.category == 'cat')
     const birds = pets?.filter(items => items.category == 'girds')
@@ -20,7 +21,7 @@ const Categories = () => {
         </div>
     }
     return (
-        <div className='my-10 '>
+        <div className='my-10 px-2 '>
             <Tabs>
                 <TabList>
                     <Tab>Dogs</Tab>

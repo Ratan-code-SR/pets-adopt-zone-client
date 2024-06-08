@@ -35,7 +35,7 @@ const Navbar = () => {
     }
     const navLinks = <>
         <NavLink to='/'><li className='ml-5 text-[15px] font-bold'>Home</li></NavLink>
-        <li className='ml-5 text-[15px] font-bold'>Pet Listing</li>
+        <NavLink to='/petsListing'><li className='ml-5 text-[15px] font-bold'>Pet Listing</li></NavLink>
         <li className='ml-5 text-[15px] font-bold'>Donation Campaigns</li>
     </>
     return (
