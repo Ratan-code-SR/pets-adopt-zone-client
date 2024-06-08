@@ -6,11 +6,12 @@ import useAuth from '../../Hooks/useAuth';
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import defaultProfile from '../../assets/defaultProfile/defaultProfile.jpg'
-import useAdmin from '../../Hooks/useAdmin';
+// import useAdmin from '../../Hooks/useAdmin';
 import { useEffect, useState } from 'react';
 const Navbar = () => {
     const { user, logOut } = useAuth()
-    const [isAdmin] = useAdmin()
+    // const [isAdmin] = useAdmin()
+    const isAdmin = false;
 
     const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light')
     const handleOnChangeTheme = (e) => {

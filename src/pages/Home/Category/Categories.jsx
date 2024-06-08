@@ -6,10 +6,10 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 const Categories = () => {
     const [pets,loading] = usePets()
-    const dogs = pets.filter(items => items.category == 'dog')
-    const cats = pets.filter(items => items.category == 'cat')
-    const birds = pets.filter(items => items.category == 'girds')
-    const rabbits = pets.filter(items => items.category == 'rabbit')
+    const dogs = pets?.filter(items => items.category == 'dog')
+    const cats = pets?.filter(items => items.category == 'cat')
+    const birds = pets?.filter(items => items.category == 'girds')
+    const rabbits = pets?.filter(items => items.category == 'rabbit')
     if (loading) {
         return <div>
              <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
