@@ -12,6 +12,7 @@ import 'swiper/css/pagination';
 
 // import required modules
 import { FreeMode, Pagination } from 'swiper/modules';
+import Title from '../../Title/Title';
 const Review = () => {
     const [reviews, setReviews] = useState([])
     const axiosPublic = useAxiosPublic()
@@ -25,6 +26,7 @@ const Review = () => {
     // console.log(reviews);
     return (
         <div>
+            <Title heading='what say our Users'></Title>
             <Swiper
                 slidesPerView={1} 
                 spaceBetween={2}

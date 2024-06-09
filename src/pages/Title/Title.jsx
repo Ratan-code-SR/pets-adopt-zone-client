@@ -1,14 +1,14 @@
+import PropTypes from 'prop-types';
 
-
-const Title = ({subHeading,heading}) => {
+const Title = ({heading}) => {
     return (
-        <div className="flex flex-col items-center justify-center">
-             <p className="-mb-2 text-red-400">--------------</p>
-            <p className="text-sm font-bold text-[#1e4272] ">{subHeading}</p>
-            <p className="-mt-2 text-red-400">--------------</p>
-            <p className="text-3xl uppercase text-orange-500">{heading}</p>
+        <div className="flex flex-col items-center justify-center my-5">
+            <p className="text-3xl text-orange-500">{heading}</p>
+            <p className="border-2 border-[#afb286] w-[150px] my-2"></p>
         </div>
     );
 };
-
+Title.propTypes = {
+    heading: PropTypes.string.isRequired
+};
 export default Title;

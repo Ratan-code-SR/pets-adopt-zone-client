@@ -3,7 +3,7 @@ import 'react-tabs/style/react-tabs.css';
 import usePets from '../../../Hooks/usePets';
 import PetsCategory from './PetsCategory';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-
+import Title from '../../Title/Title';
 const Categories = () => {
     const [pets,loading] = usePets()
     // console.log(pets);
@@ -22,6 +22,7 @@ const Categories = () => {
     }
     return (
         <div className='my-10 px-2 '>
+            <Title heading='Our Pets Category'></Title>
             <Tabs>
                 <TabList>
                     <Tab>Dogs</Tab>

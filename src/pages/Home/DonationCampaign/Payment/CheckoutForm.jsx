@@ -3,7 +3,8 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useRef, useState } from "react";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useAuth from '../../../../Hooks/useAuth';
-const CheckoutForm = ({paymentInfo}) => {
+import Swal from 'sweetalert2';
+const CheckoutForm = ({ paymentInfo }) => {
     const [error, setError] = useState(null);
     const [clientSecret, setClientSecret] = useState('');
     const [transactionId, setTransactionId] = useState('');
@@ -12,7 +13,7 @@ const CheckoutForm = ({paymentInfo}) => {
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
     const formRef = useRef(null);
-    const {petImage, petName, donateAmount, _id} = paymentInfo;
+    const { petImage, petName, donateAmount, _id } = paymentInfo;
     console.log(donateAmount);
 
     useEffect(() => {
@@ -79,20 +80,27 @@ const CheckoutForm = ({paymentInfo}) => {
 
             const payment = {
                 email: user?.email,
-                amount:donateAmount,
+                amount: donateAmount,
                 date: new Date(),
-                transactionId:paymentIntent.id,
+                transactionId: paymentIntent.id,
                 petImage,
                 petId: _id,
                 petName
             }
-            const res = await axiosSecure.post('/payments',payment)
+            const res = await axiosSecure.post('/payments', payment)
             console.log(res.data);
-
+            if (res.data?.paymentResult?.insertedId) {
+                Swal.fire({
+                    icon: "success",
+                    title: `Your data has been updated`,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
             formRef.current.reset();
             elements.getElement(CardElement).clear();
             setClientSecret('');
-            
+
         }
     };
 
@@ -126,7 +134,7 @@ const CheckoutForm = ({paymentInfo}) => {
 };
 CheckoutForm.propTypes = {
     paymentInfo: PropTypes.object.isRequired
-  };
+};
 export default CheckoutForm;
 
 
