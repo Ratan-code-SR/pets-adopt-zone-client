@@ -3,25 +3,38 @@ import { useLoaderData } from "react-router-dom";
 import Title from '../../Title/Title';
 import { useForm } from "react-hook-form";
 import useAuth from "../../../Hooks/useAuth";
-
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 const PetDetails = () => {
+    const axiosSecure = useAxiosSecure()
     const petDetailsData = useLoaderData();
-    const { petImage, adopted, name, location, age, description, longDescription, category, _id } = petDetailsData;
+    const { petImage, email, adopted, name, location, age, description, longDescription, category, _id } = petDetailsData;
     const { user } = useAuth();
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm();
     const onSubmit = async (data) => {
-        const email = user.email;
+        const ownerEmail = email;
+        const userEmail = user.email;
         const name = user.displayName;
-        const location = data.address;
+        const address = data.address;
         const phone = data.phone;
         const requestPetId = _id;
-        const petInfo = { petImage, email, name, phone, location, age, description, longDescription, category, requestPetId };
-        console.log(petInfo);
-        
+        const petRequestInfo = { petImage, userEmail, ownerEmail, name, phone, location, age, description, longDescription,address, category, requestPetId };
+        const petsData = await axiosSecure.post("/adopt", petRequestInfo)
+        if (petsData.data.insertedId) {
+            Swal.fire({
+                icon: "success",
+                title: `Your request send has been successful`,
+                showConfirmButton: false,
+                timer: 1500
+            });
+            reset()
+            document.getElementById('my_modal_1').close();
+        }
     };
 
     return (
@@ -40,8 +53,8 @@ const PetDetails = () => {
                     <p>Pet Description: {description}</p>
                     <p>Long Description: {longDescription}</p>
                     <div>
-                        <button 
-                            className="bg-[#ff9505] text-white p-3 rounded-md w-full" 
+                        <button
+                            className="bg-[#ff9505] text-white p-3 rounded-md w-full"
                             onClick={() => document.getElementById('my_modal_1').showModal()}
                         >
                             Adopt Now
@@ -106,9 +119,9 @@ const PetDetails = () => {
                                         </form>
                                     </div>
                                 </div>
-                               
+
                                 <div className="modal-action">
-                                    <button 
+                                    <button
                                         className="text-xl w-10 h-10 text-white bg-red-500 absolute top-0 right-1 rounded-full p-2"
                                         onClick={() => document.getElementById('my_modal_1').close()}
                                     >

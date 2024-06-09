@@ -75,7 +75,7 @@ const Dashboard = () => {
                                                     <NavLink to='/dashboard/myAddPets'><span className="text-2xl"><VscGitPullRequestGoToChanges /></span>My added pets </NavLink>
                                                 </li>
                                                 <li className="text-md font-bold uppercase">
-                                                    <NavLink to='/dashboard/cart'><span className="text-2xl"><FaShoppingCart /></span>Adoption Request</NavLink>
+                                                    <NavLink to='/dashboard/adoptRequest'><span className="text-2xl"><FaShoppingCart /></span>Adoption Request</NavLink>
                                                 </li>
                                                 <li className="text-md font-bold uppercase">
                                                     <NavLink to='/dashboard/crateDonationCampaign'><span className="text-2xl"><MdOutlineCreateNewFolder /></span>Create Donation Campaign</NavLink>

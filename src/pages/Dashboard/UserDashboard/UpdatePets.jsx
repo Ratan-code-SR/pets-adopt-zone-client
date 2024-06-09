@@ -21,6 +21,7 @@ const UpdatePets = () => {
             return res.data;
         }
     })
+    const adopt = data.adopted;
     const options = [
         { value: 'dog', label: 'Dog' },
         { value: 'cat', label: 'Cat' },
@@ -64,6 +65,7 @@ const UpdatePets = () => {
             description: data.description,
             longDescription: data.longDescription,
             category: selectedOption.value,
+            adopted: adopt
         };
 
         const petsData = await axiosSecure.patch(`/pets/${_id}`, petInfo);
