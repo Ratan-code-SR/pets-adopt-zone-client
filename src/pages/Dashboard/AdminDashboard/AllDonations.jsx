@@ -9,19 +9,30 @@ import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import Title from "../../Title/Title";
+import { useState } from "react";
+import { IoPlay } from "react-icons/io5";
 const AllDonations = () => {
-    const axiosSecure = useAxiosSecure()
-    const { data, isLoading, refetch } = useQuery({
+    const axiosSecure = useAxiosSecure();
+    const [pausedCampaigns, setPausedCampaigns] = useState({});
+    const { data, isLoading ,refetch} = useQuery({
         queryKey: ['donations'],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/donations`)
+            const res = await axiosSecure.get(`/donations`);
             return res.data;
-        }
-    })
+        },
+    });
+
+    const togglePauseDonationCampaign = async (id, isPaused) => {
+        await axiosSecure.patch(`/donations/pause/${id}`, { isPaused });
+        setPausedCampaigns((prev) => ({
+            ...prev,
+            [id]: isPaused,
+        }));
+    };
     const handleDelete = id => {
         Swal.fire({
             title: "Are you sure?",
-            text: "You won't be able to revert this!",
+            text: "You won't be delete this!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -57,7 +68,7 @@ const AllDonations = () => {
 
     return (
         <div>
-             <Title heading="Manage All Donations" />
+            <Title heading="Manage All Donations" />
             {
                 data && data.length > 0 ?
                     (<div className="overflow-x-auto border p-5 my-5 shadow-lg">
@@ -89,8 +100,11 @@ const AllDonations = () => {
                                                 <button title="edit" className="bg-[#ff9505] p-2 rounded-full text-white"><MdEditSquare /></button>
                                             </Link>
                                             <button
-                                                title="pause"
-                                                className="bg-[#ff9505] p-2 rounded-full text-white"><FaRegCirclePause /></button>
+                                                onClick={() => togglePauseDonationCampaign(donation._id, !pausedCampaigns[donation._id])}
+                                                className={`bg-[#ff9505] p-2 rounded-full text-white ${pausedCampaigns[donation._id] ? "opacity-50" : ""}`}
+                                            >
+                                                {pausedCampaigns[donation._id] ? <span><IoPlay /></span> : <span><FaRegCirclePause /></span>}
+                                            </button>
                                             <button
                                                 onClick={() => handleDelete(donation._id)}
                                                 title="view donators"

@@ -1,7 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { IoMdHome, IoIosAddCircle } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
-import { IoMenuSharp } from "react-icons/io5";
 import { BiDonateHeart, BiDonateBlood } from "react-icons/bi";
 import { PiUsersThreeBold, PiUsersFourFill } from "react-icons/pi";
 import { MdOutlineCreateNewFolder, MdOutlinePets } from "react-icons/md";
@@ -91,9 +90,6 @@ const Dashboard = () => {
                                     <div className="divider"></div>
                                     <li className="text-md font-bold uppercase">
                                         <NavLink to='/'><span className="text-2xl"><IoMdHome /></span>Home </NavLink>
-                                    </li>
-                                    <li className="text-md font-bold uppercase">
-                                        <NavLink to='/menu'><span className="text-2xl"><IoMenuSharp /></span>Menu </NavLink>
                                     </li>
                                 </ul>
                             </ul>
