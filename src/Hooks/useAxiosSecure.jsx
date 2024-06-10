@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import useAuth from '../Hooks/useAuth'
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000'
-    // baseURL: 'https://pet-adopt-zone-server.vercel.app'
+    // baseURL: 'http://localhost:5000'
+    baseURL: 'https://pet-adopt-zone-server.vercel.app'
 
 })
 const useAxiosSecure = () => {

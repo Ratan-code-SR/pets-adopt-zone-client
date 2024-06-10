@@ -28,7 +28,6 @@ const UserHome = () => {
     }, [axiosSecure, user?.email])
     const totalDonationAmount = donation.reduce((total, donation) => total + parseInt(donation.amount), 0)
 
-
     if (loading) {
         return <div className="flex flex-col items-center justify-center min-h-screen">
             <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
