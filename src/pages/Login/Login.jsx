@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from '../../Hooks/useAuth';
-import { toast} from "react-toastify";
+import { toast } from "react-toastify";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
@@ -13,7 +13,7 @@ const Login = () => {
         reset,
         formState: { errors },
     } = useForm()
-    const { loginUser, signInGoogle } = useAuth()
+    const { loginUser, signInGoogle, signInGithub } = useAuth()
     const navigate = useNavigate()
     const axiosPublic = useAxiosPublic()
 
@@ -50,10 +50,30 @@ const Login = () => {
                 toast.error(error.message)
             })
     }
+    const handleGithubLogin = () => {
+        signInGithub()
+            .then(result => {
+                console.log(result);
+                const userInfo = {
+                    name: result.user?.displayName,
+                    email: result.user?.email,
+                    photo: result.user?.photoURL
+                }
+                axiosPublic.post("/users", userInfo)
+                    .then(res => {
+                        console.log(res.data);
+                        navigate(location.state?.from?.pathname || "/")
+                    })
+                toast.success("github login successfully!!!")
+            })
+            .catch(error => {
+                toast.error(error.message)
+            })
+    }
 
     return (
         <div>
-            <div className="bg-white font-[sans-serif] text-[#333] min-h-screen flex flex-col items-center justify-center py-6 px-4">
+            <div className="  min-h-screen flex flex-col items-center justify-center py-6 px-4">
                 <div className="max-w-md w-full border p-8 rounded-md bg-gray-200">
                     <div className="text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="130" height="130" className="inline-block" viewBox="0 0 53 53">
@@ -125,10 +145,9 @@ const Login = () => {
                             </svg>
                         </button>
                         <button
+                            onClick={handleGithubLogin}
                             className="border-none outline-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30px" fill="#007bff" viewBox="0 0 167.657 167.657">
-                                <path d="M83.829.349C37.532.349 0 37.881 0 84.178c0 41.523 30.222 75.911 69.848 82.57v-65.081H49.626v-23.42h20.222V60.978c0-20.037 12.238-30.956 30.115-30.956 8.562 0 15.92.638 18.056.919v20.944l-12.399.006c-9.72 0-11.594 4.618-11.594 11.397v14.947h23.193l-3.025 23.42H94.026v65.653c41.476-5.048 73.631-40.312 73.631-83.154 0-46.273-37.532-83.805-83.828-83.805z" data-original="#010002"></path>
-                            </svg>
+                            <img className="w-9 h-9 rounded-full" src="https://i.ibb.co/R45WCgb/download.png" alt="" />
                         </button>
                     </div>
                     <p className="text-sm mt-3 text-center">Do not have an account <Link to='/register' className="text-[#1E2772] hover:underline ml-1 whitespace-nowrap">Register here</Link></p>

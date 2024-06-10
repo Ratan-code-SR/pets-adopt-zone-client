@@ -18,7 +18,7 @@ const MyDonations = () => {
 
         }
     })
-    
+
     if (loading) {
         return (
             <div className="flex flex-col items-center justify-center min-h-screen">
@@ -61,51 +61,57 @@ const MyDonations = () => {
     return (
         <div className="p-2">
             <Title heading="My Donations"></Title>
-            <div className="lg:flex justify-between items-center ">
-                <h1 className="text-2xl font-bold text-blue-500">Total Donation : {myDonation.length}</h1>
-                <h1 className="text-2xl font-bold text-blue-500">Total Donate Amount : {totalDonations}</h1>
-            </div>
-            <div className="overflow-x-auto">
-                <table className="table">
-                    <thead>
-                        <tr className="bg-[#96875d] text-white">
-                            <th> SL</th>
-                            <th>Pet Image</th>
-                            <th>Pet Name</th>
-                            <th>Donate Amount</th>
-                            <th>Transaction Id</th>
-                            <th>Ask for refund</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            myDonation.map((donate, index) => (
-                                <tr key={donate._id}>
-                                    <td>{index + 1}</td>
-                                    <td>
-                                        <img className="w-10 h-10 rounded-md" src={donate.petImage} alt="" />
-                                    </td>
-                                    <td>
-                                        {donate.petName}
-                                    </td>
-                                    <td>
-                                        {donate.amount}
-                                    </td>
-                                    <td>
-                                        {donate.transactionId}
-                                    </td>
-                                    <td>
-                                        <button onClick={() => handleRefund(donate._id)}>Refund</button>
-                                    </td>
-
+            {
+                myDonation.length > 0 ? <>
+                    <div className="lg:flex justify-between items-center ">
+                        <h1 className="text-2xl font-bold text-blue-500">Total Donation : {myDonation.length}</h1>
+                        <h1 className="text-2xl font-bold text-blue-500">Total Donate Amount : {totalDonations}</h1>
+                    </div>
+                    <div className="overflow-x-auto">
+                        <table className="table">
+                            <thead>
+                                <tr className="bg-[#96875d] text-white">
+                                    <th> SL</th>
+                                    <th>Pet Image</th>
+                                    <th>Pet Name</th>
+                                    <th>Donate Amount</th>
+                                    <th>Transaction Id</th>
+                                    <th>Ask for refund</th>
                                 </tr>
-                            ))
-                        }
+                            </thead>
+                            <tbody>
+                                {
+                                    myDonation.map((donate, index) => (
+                                        <tr key={donate._id}>
+                                            <td>{index + 1}</td>
+                                            <td>
+                                                <img className="w-10 h-10 rounded-md" src={donate.petImage} alt="" />
+                                            </td>
+                                            <td>
+                                                {donate.petName}
+                                            </td>
+                                            <td>
+                                                {donate.amount}
+                                            </td>
+                                            <td>
+                                                {donate.transactionId}
+                                            </td>
+                                            <td>
+                                                <button onClick={() => handleRefund(donate._id)}>Refund</button>
+                                            </td>
+
+                                        </tr>
+                                    ))
+                                }
 
 
-                    </tbody>
-                </table>
-            </div>
+                            </tbody>
+                        </table>
+                    </div>
+                </> : <>
+                <h1 className="text-center font-bold text-xl my-10">You have not donations </h1>
+                </>
+            }
         </div>
     );
 };

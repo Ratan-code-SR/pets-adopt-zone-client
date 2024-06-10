@@ -53,7 +53,7 @@ const DonationsDetails = () => {
                                     </thead>
                                     <tbody>
                                         {/* row 1 */}
-                                        {recommendDonations.reverse().slice(0, 2).map(donation => (
+                                        {recommendDonations.reverse().slice(0, 3).map(donation => (
                                             <tr key={donation._id} >
                                                 <td>
                                                     {donation.petName}

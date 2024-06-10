@@ -5,21 +5,24 @@ import PetsCategory from './PetsCategory';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import Title from '../../Title/Title';
 const Categories = () => {
-    const [pets,loading] = usePets()
-    // console.log(pets);
-    const dogs = pets?.filter(items => items.category == 'dog')
-    const cats = pets?.filter(items => items.category == 'cat')
-    const birds = pets?.filter(items => items.category == 'girds')
-    const rabbits = pets?.filter(items => items.category == 'rabbit')
+    const [pets, loading] = usePets()
+
     if (loading) {
-        return <div>
-             <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
-                <p>
-                    <Skeleton count={3} />
-                </p>
+        return <div className="flex flex-col items-center justify-center min-h-screen">
+            <Title heading="Our Pets Category" />
+            <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
+                <div className="w-full px-4">
+                    <Skeleton height={40} count={1} />
+                    <Skeleton height={20} count={10} className="mt-4" />
+                </div>
             </SkeletonTheme>
         </div>
     }
+    const dogs = pets?.filter(items => items.category == 'dog')
+    const cats = pets?.filter(items => items.category == 'cat')
+    const birds = pets?.filter(items => items.category == 'bird')
+    const rabbits = pets?.filter(items => items.category == 'rabbit')
+
     return (
         <div className='my-10 px-2 '>
             <Title heading='Our Pets Category'></Title>
@@ -31,16 +34,16 @@ const Categories = () => {
                     <Tab>Rabbit</Tab>
                 </TabList>
                 <TabPanel>
-                   <PetsCategory petsData={dogs}></PetsCategory>
+                    <PetsCategory petsData={dogs}></PetsCategory>
                 </TabPanel>
                 <TabPanel>
                     <PetsCategory petsData={cats}></PetsCategory>
                 </TabPanel>
                 <TabPanel>
-                <PetsCategory petsData={birds}></PetsCategory>
+                    <PetsCategory petsData={birds}></PetsCategory>
                 </TabPanel>
                 <TabPanel>
-                <PetsCategory petsData={rabbits}></PetsCategory>
+                    <PetsCategory petsData={rabbits}></PetsCategory>
                 </TabPanel>
             </Tabs>
         </div>

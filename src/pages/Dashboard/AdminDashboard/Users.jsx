@@ -66,18 +66,19 @@ const Users = () => {
     }
 
     if (isLoading) {
-        return <div>
-            <Title subHeading={'All Pets'} heading={'manage all Pets'} />
+        return <div className="flex flex-col items-center justify-center min-h-screen">
+            <Title heading="Manage All Users" />
             <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
-                <p>
-                    <Skeleton count={3} />
-                </p>
+                <div className="w-full px-4">
+                    <Skeleton height={40} count={1} />
+                    <Skeleton height={20} count={10} className="mt-4" />
+                </div>
             </SkeletonTheme>
         </div>
     }
     return (
         <div>
-            <Title subHeading={'Your Users'} heading={'manage all users'} />
+            <Title  heading={'Manage All Users'} />
             <div className="overflow-x-auto border p-5 my-5 shadow-lg">
                 <div>
                     <p className="text-3xl font-bold my-3 text-blue-600">Total User: {data.length}</p>

@@ -5,32 +5,38 @@ import { GiWallet } from "react-icons/gi";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { Link } from 'react-router-dom';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import useAuth from '../../../Hooks/useAuth';
 const AdminHome = () => {
     const [users, setUser] = useState([])
     const [pets, setPets] = useState([])
     const [donation, setDonation] = useState([])
     const axiosSecure = useAxiosSecure()
+    const {loading} = useAuth()
     useEffect(() => {
         const usersData = async () => {
-            const res = await axiosSecure.get('/users')
-            setUser(res.data)
+            const userRes = await axiosSecure.get('/users')
+            const petsRes = await axiosSecure.get('/pets')
+            const donationRes = await axiosSecure.get('/donations')
+            setUser(userRes.data)
+            setPets(petsRes.data)
+            setDonation(donationRes.data)
         }
         usersData()
     }, [axiosSecure])
-    useEffect(() => {
-        const petsData = async () => {
-            const res = await axiosSecure.get('/pets')
-            setPets(res.data)
-        }
-        petsData()
-    }, [axiosSecure])
-    useEffect(() => {
-        const donationData = async () => {
-            const res = await axiosSecure.get('/donations')
-            setDonation(res.data)
-        }
-        donationData()
-    },[axiosSecure])
+    if (loading) {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-screen">
+                <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
+                    <div className="w-full px-4">
+                        <Skeleton height={40} count={1} />
+                        <Skeleton height={20} count={10} className="mt-4" />
+                    </div>
+                </SkeletonTheme>
+            </div>
+        );
+    }
+
     return (
         <div className='my-5 px-2'>
             <div className='lg:grid grid-cols-3 flex flex-col gap-5 items-center justify-center '>

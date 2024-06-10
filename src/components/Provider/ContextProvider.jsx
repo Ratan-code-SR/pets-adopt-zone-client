@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types'; // ES6
-import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 export const AuthContext = createContext()
@@ -21,12 +21,20 @@ const ContextProvider = ({ children }) => {
     }
 
     // google login 
-    const provider = new GoogleAuthProvider();
     const signInGoogle = () => {
+        const provider = new GoogleAuthProvider();
         setLoading(true)
         return signInWithPopup(auth, provider)
     }
 
+    // github login 
+
+    const signInGithub = () => {
+        const provider = new GithubAuthProvider();
+        setLoading(true)
+        return signInWithPopup(auth, provider)
+
+    }
     // logout user 
     const logOut = () => {
         setLoading(true)
@@ -72,7 +80,8 @@ const ContextProvider = ({ children }) => {
         signUpUser,
         userProfileUpdated,
         loginUser,
-        logOut
+        logOut,
+        signInGithub
     }
     return (
         <AuthContext.Provider value={info}>

@@ -37,7 +37,7 @@ const CreateDonationCampaigns = () => {
             if (petsData.data.insertedId) {
                 Swal.fire({
                     icon: "success",
-                    title: `Your ${data.name} has been added`,
+                    title: `Your campaign has been added`,
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -91,7 +91,7 @@ const CreateDonationCampaigns = () => {
                             <div>
                                 <label className="text-sm mb-2 block font-bold">Short Description</label>
                                 <textarea
-                                    {...register("shortDescription", { required: true, maxLength: 20 })}
+                                    {...register("shortDescription", { required: true })}
                                     name="shortDescription"
                                     type="text"
                                     className="bg-gray-100 w-full text-sm px-4 py-3 rounded-md outline-blue-500"

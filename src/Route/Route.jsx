@@ -23,11 +23,15 @@ import PetDetails from '../pages/Home/PetListing/PetDetails.jsx';
 import AdoptionRequest from '../pages/Dashboard/UserDashboard/AdoptionRequest.jsx';
 import DonationCampaign from '../pages/Home/DonationCampaign/DonationCampaign.jsx';
 import DonationsDetails from '../pages/Home/DonationCampaign/DonationsDetails.jsx';
+import ErrorPage from '../ErrorPage.jsx';
 const router = createBrowserRouter([
+    {
+        path: '*',
+        element: <ErrorPage/>
+    },
     {
         path: "/",
         element: <Main />,
-        // element: <ErrorElement />,
         children: [
             {
                 path: "/",
