@@ -4,6 +4,7 @@ import usePets from '../../../Hooks/usePets';
 import PetsCategory from './PetsCategory';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import Title from '../../Title/Title';
+import Heading from '../../../components/Heading/Heading';
 const Categories = () => {
     const [pets, loading] = usePets()
 
@@ -24,14 +25,15 @@ const Categories = () => {
     const rabbits = pets?.filter(items => items.category == 'rabbit')
 
     return (
-        <div className='my-10 px-2 '>
+        <div className='my-10 px-2 w-full '>
             <Title heading='Our Pets Category'></Title>
+            <Heading heading={`Explore our wide range of adorable pets looking for their forever homes, including cats, dogs, rabbits, birds, and more.`}></Heading>
             <Tabs>
                 <TabList>
                     <Tab>Dogs</Tab>
                     <Tab>Cats</Tab>
                     <Tab>Birds</Tab>
-                    <Tab>Rabbit</Tab>
+                    <Tab>Rabbits</Tab>
                 </TabList>
                 <TabPanel>
                     <PetsCategory petsData={dogs}></PetsCategory>

@@ -23,10 +23,9 @@ const Review = () => {
         }
         reviewData()
     }, [axiosPublic])
-    // console.log(reviews);
     return (
         <div>
-            <Title heading='what say our Users'></Title>
+            <Title heading='What Say Our Users'></Title>
             <Swiper
                 slidesPerView={1} 
                 spaceBetween={2}

@@ -23,7 +23,7 @@ const PetDetails = () => {
         const address = data.address;
         const phone = data.phone;
         const requestPetId = _id;
-        const petRequestInfo = { petImage, userEmail, ownerEmail, name, phone, location, age, description, longDescription,address, category, requestPetId };
+        const petRequestInfo = { petImage, userEmail, ownerEmail, name, phone, location, age, description, longDescription, address, category, requestPetId };
         const petsData = await axiosSecure.post("/adopt", petRequestInfo)
         if (petsData.data.insertedId) {
             Swal.fire({
@@ -38,23 +38,22 @@ const PetDetails = () => {
     };
 
     return (
-        <div className="my-10">
+        <div className="my-10 px-2">
             <Title heading={'View Pet Details'}></Title>
-            <div className="lg:grid grid-cols-2 border-2 gap-5 p-2 w-10/12 lg:w-9/12 justify-center mx-auto flex flex-col">
+            <div className="lg:grid grid-cols-2 border-2 gap-5 p-2  lg:w-9/12 justify-center mx-auto flex flex-col w-full">
                 <div>
                     <img className="h-[350px] w-full" src={petImage} alt="Pet" />
                 </div>
                 <div>
-                    <p>Pet Name: {name}</p>
-                    <p>Pet Age: {age}</p>
-                    <p>Pet Category: {category}</p>
-                    <p>Adopted: {adopted}</p>
-                    <p>Pet Location: {location}</p>
-                    <p>Pet Description: {description}</p>
-                    <p>Long Description: {longDescription}</p>
+                    <p className="font-bold lg:my-1 text-xl">Pet Name: <span className="font-normal">{name}</span></p>
+                    <p className="font-bold lg:my-1 text-xl">Age: <span className="font-normal">{age}</span></p>
+                    <p className="font-bold lg:my-1 text-xl">Adopt Status: <span className="font-normal">{adopted}</span></p>
+                    <p className="font-bold lg:my-1 text-xl">Pet Location: <span className="font-normal">{location}</span></p>
+                    <p className="font-bold lg:my-1 text-xl">Short Description: <span className="font-normal"> {description}</span></p>
+                    <p className="font-bold lg:my-1 text-xl">Long Description: <span className="font-normal"> {longDescription}</span></p>
                     <div>
                         <button
-                            className="bg-[#ff9505] text-white p-3 rounded-md w-full"
+                            className="bg-[#ff9505] text-white p-3 mt-5 rounded-md w-full"
                             onClick={() => document.getElementById('my_modal_1').showModal()}
                         >
                             Adopt Now
