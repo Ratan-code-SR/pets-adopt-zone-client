@@ -34,7 +34,7 @@ const Dashboard = () => {
                         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
                         <div className="drawer-content flex  items-center">
                             {/* Page content here */}
-                            <label htmlFor="my-drawer" className="text-black font-bold text-4xl mr-2 drawer-button">
+                            <label htmlFor="my-drawer" className=" font-bold text-4xl mr-2 drawer-button">
                                 <GiHamburgerMenu />
                             </label>
                             <img className='w-10 h-10' src={logo} alt="" />

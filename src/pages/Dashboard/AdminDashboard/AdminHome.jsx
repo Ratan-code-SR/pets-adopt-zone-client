@@ -7,12 +7,13 @@ import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { Link } from 'react-router-dom';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import useAuth from '../../../Hooks/useAuth';
+import AdminChart from '../Chart/AminChart';
 const AdminHome = () => {
     const [users, setUser] = useState([])
     const [pets, setPets] = useState([])
     const [donation, setDonation] = useState([])
     const axiosSecure = useAxiosSecure()
-    const {loading} = useAuth()
+    const { loading, user } = useAuth()
     useEffect(() => {
         const usersData = async () => {
             const userRes = await axiosSecure.get('/users')
@@ -38,8 +39,9 @@ const AdminHome = () => {
     }
 
     return (
-        <div className='my-5 px-2'>
-            <div className='lg:grid grid-cols-3 flex flex-col gap-5 items-center justify-center '>
+        <div className='my-5 px-2 w-full'>
+            <h1 className="lg:text-4xl text-2xl my-5 ml-3 ">Hi! WelCome <span className="text-[#ff9505]">{user?.displayName}</span></h1>
+            <div className='grid w-full lg:grid-cols-3 grid-cols-1 gap-5 items-center justify-center '>
                 <Link to={'/dashboard/users'}>
                     <div className='bg-[#fcdbee] w-full justify-center flex  items-center gap-10  text-white p-4  border-b-4 rounded-md border-[#dd2374] '>
                         <p className='text-3xl bg-[#dd2374] p-2 rounded-full'><FaUsers /></p>
@@ -76,6 +78,9 @@ const AdminHome = () => {
                         </div>
                     </div>
                 </Link>
+            </div>
+            <div className='flex items-center justify-center'>
+                <AdminChart users={users.length} pets={pets.length} donation={donation.length} />
             </div>
         </div>
     );

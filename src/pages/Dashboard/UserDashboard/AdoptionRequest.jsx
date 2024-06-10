@@ -18,12 +18,12 @@ const AdoptionRequest = () => {
             const res = await axiosSecure.get(`/adopt/adoptEmail/${user?.email}`)
             return res.data
         }
-       
+
     })
     const handleIsReject = async (id) => {
 
     }
-    
+
     const handleIsAccepted = async (id) => {
         const petsData = data.find(pet => pet.requestPetId === id);
         const petUpdateInfo = {
@@ -36,9 +36,9 @@ const AdoptionRequest = () => {
             category: petsData.category,
             adopted: 'true'
         }
-       const res = await axiosSecure.patch(`/pets/${id}`, petUpdateInfo)
+        const res = await axiosSecure.patch(`/pets/${id}`, petUpdateInfo)
         setIsAccepted(petUpdateInfo.adopted)
-        if(res.data.modifiedCount){
+        if (res.data.modifiedCount) {
             setIsAccepted(petsData.adopted)
             console.log(petsData.adopted);
         }

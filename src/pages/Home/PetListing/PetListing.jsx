@@ -29,6 +29,7 @@ const PetListing = () => {
     const handleCategoryChange = (e) => {
         setSelectedCategory(e.target.value);
     };
+
     if (loading) {
         return (
             <div className="flex flex-col items-center justify-center min-h-screen">
@@ -43,7 +44,7 @@ const PetListing = () => {
     }
 
     return (
-        <div className='px-2'>
+        <div className='px-2 w-full'>
             <h1 className='text-center text-2xl my-5 text-orange-400'>View All Pets</h1>
             <div className="search-bar w-full mb-5 flex px-2 justify-between items-center">
                 <input type="text"
@@ -65,7 +66,7 @@ const PetListing = () => {
             </div>
             <div className="lg:grid grid-cols-3 items-center justify-center gap-5 flex flex-col">
                 {Array.isArray(pets) && pets.map(pet => (
-                    <div key={pet._id} className="card card-compact w-96 h-[400px] bg-base-100 shadow-xl">
+                    <div key={pet._id} className="card card-compact w-full lg:w-96 h-[400px] bg-base-100 shadow-xl">
                         <figure>
                             <img className='w-full' src={pet.petImage} alt={pet.name} />
                         </figure>
@@ -85,6 +86,9 @@ const PetListing = () => {
                     </div>
                 ))}
             </div>
+            {
+                searchQuery && <p className='text-2xl font-bold text-center my-10'>Not Found</p>
+            }
         </div>
     );
 };

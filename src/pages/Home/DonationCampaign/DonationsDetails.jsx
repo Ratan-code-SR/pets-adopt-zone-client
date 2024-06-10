@@ -8,7 +8,7 @@ const DonationsDetails = () => {
     const donateDetailsData = useLoaderData();
     const [donations] = useDonations()
     const [donateAmount, setDonateAmount] = useState('')
-    const { petImage, petName, _id, maximumDonationAmount, shortDescription, longDescription, } = donateDetailsData;
+    const { petImage, petName, _id, maximumDonationAmount, shortDescription, longDescription,isPaused } = donateDetailsData;
     const handleAmount = (e) => {
         e.preventDefault()
         const form = e.target;
@@ -33,6 +33,8 @@ const DonationsDetails = () => {
                     <p className="font-bold">Long Description: <span className="font-normal"> {longDescription}</span></p>
                     <div>
                         <button
+                        title={isPaused === true && `Can't donate now` }
+                        disabled={isPaused === true }
                             className="bg-[#ff9505] text-white p-3 mt-2 rounded-md w-full"
                             onClick={() => document.getElementById('my_modal_1').showModal()}
                         >

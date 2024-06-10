@@ -146,7 +146,7 @@ const MyAddedPets = () => {
     if (isLoading) {
         return (
             <div>
-                <Title subHeading={'Your Pets'} heading={'manage all Pets'} />
+                <Title heading={'Manage All Pets'} />
                 <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
                     <p>
                         <Skeleton count={3} />
@@ -188,7 +188,7 @@ const MyAddedPets = () => {
 
     return (
         <div>
-            <Title subHeading={'Your Pets'} heading={'manage all Pets'} />
+            <Title heading={'Manage All Pets'} />
             {
                 data && data.pets.length > 0 ?
                     (

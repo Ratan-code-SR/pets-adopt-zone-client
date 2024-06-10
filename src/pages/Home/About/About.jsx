@@ -1,9 +1,11 @@
-import Title from "../../Title/Title";
+import { Link } from "react-router-dom";
+
 
 const About = () => {
     return (
         <div className="my-10">
-              <Title heading={`About __ Us`} />
+            <h1 className="text-orange-400 text-center text-4xl my-10
+            ">About __ Us</h1>
             <div className=" mt-2  mx-auto">
                 <div className="lg:grid md:grid-cols-2  gap-6 flex flex-col">
                     <div className="ml-2 lg:text-2xl max-md:text-center z-50 relative">
@@ -11,7 +13,7 @@ const About = () => {
                       <span className="lg:text-3xl font-bold">Welcome</span> to our <span className="font-bold text-orange-400">Pet Adoption</span>   Platform, <br /> where we connect loving homes with adorable pets in need. Join us in our mission to give every pet a second chance at happiness.
                        </p>
                         <button className="p-2 text-[15px]  my-5 text-white rounded-md bg-[#ff9505]">
-                            Get Started
+                          <Link to={'/petsListing'}>Get Started</Link>
                         </button>
                         <div className="mt-10">
                             <div className="grid grid-cols-2 gap-4 items-center">
