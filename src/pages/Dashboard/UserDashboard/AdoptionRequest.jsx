@@ -6,11 +6,10 @@ import { GoCheck } from "react-icons/go";
 import { IoMdRemoveCircle } from "react-icons/io";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import useAuth from "../../../Hooks/useAuth";
-import { useState } from "react";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 const AdoptionRequest = () => {
     const axiosSecure = useAxiosSecure()
-    const [isAccepted, setIsAccepted] = useState('')
-    const [isReject, setIsReject] = useState('')
+    const axiosPublic = useAxiosPublic()
     const { user } = useAuth()
     const { data, isLoading, refetch } = useQuery({
         queryKey: ['adopt'],
@@ -20,11 +19,26 @@ const AdoptionRequest = () => {
         }
 
     })
-    const handleIsReject = async (id) => {
 
+    const handleIsReject = async (id,petId) => {
+        const petsData = data.find(pet => pet.requestPetId === id);
+        const petUpdateInfo = {
+            petImage: petsData.petImage,
+            name: petsData.name,
+            location: petsData.location,
+            age: petsData.age,
+            description: petsData.description,
+            longDescription: petsData.longDescription,
+            category: petsData.category,
+            adopted: 'false'
+        }
+     await axiosSecure.patch(`/pets/${id}`, petUpdateInfo)
+     await axiosPublic.patch(`/adopt/${petId}`, {adopted:'false'})
+
+        refetch();
     }
-
-    const handleIsAccepted = async (id) => {
+    // console.log(data);
+    const handleIsAccepted = async (id,petId) => {
         const petsData = data.find(pet => pet.requestPetId === id);
         const petUpdateInfo = {
             petImage: petsData.petImage,
@@ -36,26 +50,27 @@ const AdoptionRequest = () => {
             category: petsData.category,
             adopted: 'true'
         }
-        const res = await axiosSecure.patch(`/pets/${id}`, petUpdateInfo)
-        setIsAccepted(petUpdateInfo.adopted)
-        if (res.data.modifiedCount) {
-            setIsAccepted(petsData.adopted)
-            console.log(petsData.adopted);
-        }
+      await axiosSecure.patch(`/pets/${id}`, petUpdateInfo)
+      await axiosPublic.patch(`/adopt/${petId}`, {adopted:'true'})
         refetch();
     }
+
     if (isLoading) {
-        return <div>
-            <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
-                <p>
-                    <Skeleton count={3} />
-                </p>
-            </SkeletonTheme>
-        </div>
+        return (
+            <div className="flex flex-col items-center justify-center min-h-screen">
+                <Title heading="Manage All Pets" />
+                <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
+                    <div className="w-full px-4">
+                        <Skeleton height={40} count={1} />
+                        <Skeleton height={20} count={10} className="mt-4" />
+                    </div>
+                </SkeletonTheme>
+            </div>
+        );
     }
     return (
         <div>
-            <Title subHeading={'Your Request'} heading={'manage all Request'} />
+            <Title  heading={'Manage All Request'} />
             {
                 data && data.length > 0 ?
                     (<div className="overflow-x-auto border p-5 my-5 shadow-lg">
@@ -90,23 +105,27 @@ const AdoptionRequest = () => {
                                         <td>{pet?.address}</td>
                                         <td className="">
                                             <button
-                                                disabled={isReject}
-                                                onClick={() => handleIsAccepted(pet.requestPetId)}
+                                                disabled={data.adopted == 'false'}
+                                                onClick={() => handleIsAccepted(pet.requestPetId, pet._id)}
                                                 className="text-sm ">
                                                 {
-                                                    isAccepted ? <span
-                                                        className="text-green-600 text-2xl"
-                                                    ><GoCheck /></span> : <p className="bg-green-600 text-white rounded-full p-1 px-2">accept</p>
+                                                    pet?.adopted == 'true' ?
+                                                    <span
+                                                    className="text-green-600 text-2xl"
+                                                ><GoCheck /></span>  : 'accept'      
                                                 }
                                             </button>
                                         </td>
                                         <td >
-                                            <button onClick={() => handleIsReject(pet.requestPetId)}
+                                            <button
+                                            onClick={() => handleIsReject(pet.requestPetId,pet._id)}
                                                 className="text-sm ">
                                                 {
-                                                    isReject ? <span
-                                                        className="text-red-600 text-2xl"
-                                                    ><IoMdRemoveCircle /></span> : <p className="bg-red-600 text-white rounded-full p-1 px-2">reject</p>
+                                                    pet?.adopted == 'false' ?
+                                                    <span
+                                                    className="text-red-600 text-2xl"
+                                                ><IoMdRemoveCircle /></span>
+                                                        : 'reject'     
                                                 }
                                             </button>
                                         </td>

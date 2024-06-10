@@ -5,7 +5,6 @@ import router from './Route/Route';
 import { RouterProvider } from "react-router-dom";
 import ContextProvider from './components/Provider/ContextProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
 // Create a new QueryClient instance
 const queryClient = new QueryClient();
 

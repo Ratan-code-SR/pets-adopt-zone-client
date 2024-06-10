@@ -22,8 +22,9 @@ const PetDetails = () => {
         const name = user.displayName;
         const address = data.address;
         const phone = data.phone;
+        const adopted = 'false';
         const requestPetId = _id;
-        const petRequestInfo = { petImage, userEmail, ownerEmail, name, phone, location, age, description, longDescription, address, category, requestPetId };
+        const petRequestInfo = { petImage, userEmail, ownerEmail, name, phone, location, age, description, longDescription,adopted, address, category, requestPetId };
         const petsData = await axiosSecure.post("/adopt", petRequestInfo)
         if (petsData.data.insertedId) {
             Swal.fire({
