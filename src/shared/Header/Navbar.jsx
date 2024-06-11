@@ -8,6 +8,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import defaultProfile from '../../assets/defaultProfile/defaultProfile.jpg'
 import { useEffect, useState } from 'react';
 import useAdmin from '../../Hooks/useAdmin';
+import { IoMdHome } from 'react-icons/io';
+import { BiDonateHeart } from 'react-icons/bi';
+import { FaListCheck } from "react-icons/fa6";
 const Navbar = () => {
     const { user, logOut } = useAuth()
     const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark')
@@ -15,7 +18,7 @@ const Navbar = () => {
         const newTheme = e.target.checked ? 'light' : 'dark';
         setTheme(newTheme)
     }
-const [isAdmin] = useAdmin()
+    const [isAdmin] = useAdmin()
     useEffect(() => {
         localStorage.setItem("theme", theme);
         const setLocalTheme = localStorage.getItem('theme')
@@ -31,9 +34,15 @@ const [isAdmin] = useAdmin()
     }
 
     const navLinks = <>
-        <NavLink to='/'><li className='ml-5 text-[15px] font-bold'>Home</li></NavLink>
-        <NavLink to='/petsListing'><li className='ml-5 text-[15px] font-bold'>Pet Listing</li></NavLink>
-        <NavLink to='/donationCampaign'><li className='ml-5 text-[15px] font-bold'>Donation Campaigns</li></NavLink>
+        <li className="text-md font-bold uppercase">
+            <NavLink to='/'><span className="text-2xl"><IoMdHome/></span>Home</NavLink>
+        </li>
+        <li className="text-md font-bold uppercase">
+            <NavLink to='/petsListing'><span className="text-2xl"><FaListCheck /></span>Pet Listing</NavLink>
+        </li>
+        <li className="text-md font-bold uppercase">
+            <NavLink to='/donationCampaign'><span className="text-2xl"><BiDonateHeart /></span>Donation Campaigns</NavLink>
+        </li>
     </>
     return (
 
@@ -93,23 +102,23 @@ const [isAdmin] = useAdmin()
                         {user && <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                             <li>
                                 <a >
-                                   {user?.displayName}
-                                   
+                                    {user?.displayName}
+
                                 </a>
                             </li>
                             <li>
                                 <a >
-                                   {user?.email}
-                                   
+                                    {user?.email}
+
                                 </a>
                             </li>
                             <li >
-                                {isAdmin ?  
-                                 <Link to={'/dashboard/adminHome'}>
-                                 Dashboard
-                             </Link> :
-                             <Link to={'/dashboard/userHome'}> Dashboard</Link>
-                            }
+                                {isAdmin ?
+                                    <Link to={'/dashboard/adminHome'}>
+                                        Dashboard
+                                    </Link> :
+                                    <Link to={'/dashboard/userHome'}> Dashboard</Link>
+                                }
                             </li>
                             <li><a onClick={handleLogOut} className='text-blue-500'>Logout</a></li>
                         </ul>}

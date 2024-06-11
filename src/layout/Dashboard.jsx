@@ -36,15 +36,15 @@ const Dashboard = () => {
                             <label htmlFor="my-drawer" className=" font-bold text-4xl mr-2 drawer-button">
                                 <GiHamburgerMenu />
                             </label>
-                            <img className='w-10 h-10' src={logo} alt="" />
-                            <p className='text-xl font-bold'>PetAdoptZone</p>
+                            <img className='w-10 h-10 rounded-full' src={logo} alt="" />
+                            <p className='text-2xl font-bold'><span className='text-[#ff9505] '>Pet</span>Adopt<span className='text-[#a9af57]'>Zone</span></p>
                         </div>
                         <div className="drawer-side z-10 ">
                             <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
                             <ul className="menu p-4 lg:w-80 w-56 min-h-full text-base-content bg-base-200 z-10">
                                 <div className=" flex gap-2 items-center">
-                                    <img className='w-10 h-10' src={logo} alt="" />
-                                    <p className='text-xl font-bold'>PetAdoptZone</p>
+                                    <img className='w-10 h-10 rounded-full' src={logo} alt="" />
+                                    <p className='text-2xl font-bold'><span className='text-[#ff9505] '>Pet</span>Adopt<span className='text-[#a9af57]'>Zone</span></p>
                                 </div>
                                 <ul className="menu p-4 text-[#1e4272] z-10">
                                     {
