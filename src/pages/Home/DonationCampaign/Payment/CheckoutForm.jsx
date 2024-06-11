@@ -80,6 +80,7 @@ const CheckoutForm = ({ paymentInfo }) => {
 
             const payment = {
                 email: user?.email,
+                name: user?.displayName,
                 amount: donateAmount,
                 date: new Date(),
                 transactionId: paymentIntent.id,
