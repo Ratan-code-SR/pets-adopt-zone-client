@@ -45,7 +45,8 @@ const PetListing = () => {
 
     return (
         <div className='px-2 w-full'>
-            <h1 className='text-center text-2xl my-5 text-orange-400'>View All Pets</h1>
+            <h1 className='text-center text-2xl my-3 text-orange-400'>View All Pets</h1>
+            <p  className="text-center text-xl lg:w-2/3 mb-4 mx-auto">Explore a complete list of available animals, featuring detailed profiles to help you find your perfect companion.</p>
             <div className="search-bar w-full mb-5 flex px-2 justify-between items-center">
                 <input type="text"
                  placeholder="Search by pet name" 
