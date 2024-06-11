@@ -50,7 +50,7 @@ const AddPets = () => {
             if (petsData.data.insertedId) {
                 Swal.fire({
                     icon: "success",
-                    title: `Your ${category} data has been saved`,
+                    title: `Your ${category} data has been added`,
                     showConfirmButton: false,
                     timer: 1500
                 });

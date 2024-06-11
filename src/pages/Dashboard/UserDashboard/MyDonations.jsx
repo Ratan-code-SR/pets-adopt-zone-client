@@ -91,13 +91,13 @@ const MyDonations = () => {
                                                 {donate.petName}
                                             </td>
                                             <td>
-                                                {donate.amount}
+                                                {donate.amount} $
                                             </td>
                                             <td>
                                                 {donate.transactionId}
                                             </td>
                                             <td>
-                                                <button onClick={() => handleRefund(donate._id)}>Refund</button>
+                                                <button className="p-2 rounded-md text-white bg-orange-400" onClick={() => handleRefund(donate._id)}>Refund?</button>
                                             </td>
 
                                         </tr>

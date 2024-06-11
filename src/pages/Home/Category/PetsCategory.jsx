@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 const PetsCategory = ({ petsData }) => {
     return (
         <>
-            <div className="lg:grid grid-cols-3 items-center justify-center gap-5 flex flex-col">
+            <div className="grid lg:grid-cols-3  sm:grid-cols-2 items-center justify-center gap-5">
                 {
-                    petsData.slice(0,6).map(pet => (<div className='w-full' key={pet._id}>
-                        <div className="card card-compact lg:w-96 w-full h-[400px] bg-base-100 shadow-xl">
+                    petsData.slice(0,6).map(pet => (<div className='w-full mt-3' key={pet._id}>
+                        <div className="card card-compact w-full h-[400px] bg-base-100 shadow-xl">
                             <figure><img className='w-full' src={pet.petImage} alt="Pets" /></figure>
                             <div className="card-body">
                                 <h2 className="card-title">{pet.name}</h2>

@@ -19,10 +19,12 @@ const Categories = () => {
             </SkeletonTheme>
         </div>
     }
-    const dogs = pets?.filter(items => items.category == 'dog')
-    const cats = pets?.filter(items => items.category == 'cat')
-    const birds = pets?.filter(items => items.category == 'bird')
-    const rabbits = pets?.filter(items => items.category == 'rabbit')
+    const petsArray = Array.isArray(pets) ? pets : [];
+
+    const dogs = petsArray?.filter(items => items.category == 'dog')
+    const cats = petsArray?.filter(items => items.category == 'cat')
+    const birds = petsArray?.filter(items => items.category == 'bird')
+    const rabbits = petsArray?.filter(items => items.category == 'rabbit')
 
     return (
         <div className='my-10 px-2 w-full '>

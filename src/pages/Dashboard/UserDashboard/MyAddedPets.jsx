@@ -64,7 +64,6 @@ const MyAddedPets = () => {
         });
     };
     const pets = data.pets;
-console.log(data);
     const handleIsAccepted = async (id) => {
         const pet = pets.find(pet => pet._id === id);
         const petUpdateInfo = {

@@ -27,12 +27,12 @@ import ErrorPage from '../ErrorPage.jsx';
 const router = createBrowserRouter([
     {
         path: '*',
-        element: <ErrorPage/>
+        element: <ErrorPage />
     },
     {
         path: "/",
         element: <Main />,
-        errorElement: <ErrorPage/>,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: "/",
@@ -48,22 +48,22 @@ const router = createBrowserRouter([
             },
             {
                 path: "/petsListing",
-                element: <PetListing/>
+                element: <PetListing />
             },
             {
                 path: "/petsDetails/:id",
-                element: <PetDetails/>,
-                loader: ({params}) => fetch(`https://pet-adopt-zone-server.vercel.app/pets/${params.id}`)
+                element: <PetDetails />,
+                loader: ({ params }) => fetch(`https://pet-adopt-zone-server.vercel.app/pets/${params.id}`)
 
             },
             {
                 path: "/donationCampaign",
-                element: <DonationCampaign/>
+                element: <DonationCampaign />
             },
             {
                 path: "/donationsDetails/:id",
-                element: <DonationsDetails/>,
-                loader: ({params}) => fetch(`https://pet-adopt-zone-server.vercel.app/donations/${params.id}`)
+                element: <DonationsDetails />,
+                loader: ({ params }) => fetch(`https://pet-adopt-zone-server.vercel.app/donations/${params.id}`)
             },
 
         ],
@@ -86,23 +86,23 @@ const router = createBrowserRouter([
             },
             {
                 path: "userHome",
-                element:<PrivateRoute><UserHome /></PrivateRoute>
+                element: <PrivateRoute><UserHome /></PrivateRoute>
             },
             {
                 path: 'allDonations',
-                element:<AdminRoute><AllDonations/></AdminRoute>
+                element: <AdminRoute><AllDonations /></AdminRoute>
             },
             {
                 path: "addPet",
-                element:<PrivateRoute><AddPets /></PrivateRoute>
+                element: <PrivateRoute><AddPets /></PrivateRoute>
             },
             {
                 path: 'myAddPets',
-                element:<PrivateRoute> <MyAddedPets /></PrivateRoute>
+                element: <PrivateRoute> <MyAddedPets /></PrivateRoute>
             },
             {
                 path: 'myDonated',
-                element:<PrivateRoute><MyDonations /></PrivateRoute>
+                element: <PrivateRoute><MyDonations /></PrivateRoute>
             },
             {
                 path: 'updatePet/:id',
@@ -112,21 +112,21 @@ const router = createBrowserRouter([
             },
             {
                 path: 'crateDonationCampaign',
-                element:<PrivateRoute><CreateDonationCampaigns /></PrivateRoute>
+                element: <PrivateRoute><CreateDonationCampaigns /></PrivateRoute>
             },
             {
-                path:'myDonationCampaign',
-                element:<PrivateRoute><MyDonationsCampaigns/></PrivateRoute>
+                path: 'myDonationCampaign',
+                element: <PrivateRoute><MyDonationsCampaigns /></PrivateRoute>
             },
             {
-                path:"editDonationCampaign/:id",
-                element:<PrivateRoute><EditDonationCampaign/></PrivateRoute>,
-                loader:({params}) => fetch(`https://pet-adopt-zone-server.vercel.app/donations/${params.id}`)
+                path: "editDonationCampaign/:id",
+                element: <PrivateRoute><EditDonationCampaign /></PrivateRoute>,
+                loader: ({ params }) => fetch(`https://pet-adopt-zone-server.vercel.app/donations/${params.id}`)
 
             },
             {
-                path:'adoptRequest',
-                element: <PrivateRoute><AdoptionRequest/></PrivateRoute>
+                path: 'adoptRequest',
+                element: <PrivateRoute><AdoptionRequest /></PrivateRoute>
             }
 
         ]

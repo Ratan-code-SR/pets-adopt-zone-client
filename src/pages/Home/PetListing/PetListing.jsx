@@ -64,9 +64,9 @@ const PetListing = () => {
                     <option value="rabbit">Rabbits</option>
                 </select>
             </div>
-            <div className="lg:grid grid-cols-3 items-center justify-center gap-5 flex flex-col">
+            <div className="grid lg:grid-cols-3  sm:grid-cols-2 items-center justify-center gap-5">
                 {Array.isArray(pets) && pets.map(pet => (
-                    <div key={pet._id} className="card card-compact w-full lg:w-96 h-[400px] bg-base-100 shadow-xl">
+                    <div key={pet._id} className="card card-compact w-full h-[400px] bg-base-100 shadow-xl">
                         <figure>
                             <img className='w-full' src={pet.petImage} alt={pet.name} />
                         </figure>

@@ -10,9 +10,9 @@ import { useEffect, useState } from 'react';
 import useAdmin from '../../Hooks/useAdmin';
 const Navbar = () => {
     const { user, logOut } = useAuth()
-    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light')
+    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark')
     const handleOnChangeTheme = (e) => {
-        const newTheme = e.target.checked ? 'dark' : 'light';
+        const newTheme = e.target.checked ? 'light' : 'dark';
         setTheme(newTheme)
     }
 const [isAdmin] = useAdmin()
@@ -37,8 +37,8 @@ const [isAdmin] = useAdmin()
     </>
     return (
 
-        <nav>
-            <section className="bg-[#1e4272] min-h-[40px] px-4 py-2 sm:px-10 flex items-center max-sm:flex-col">
+        <nav className=''>
+            <section className="bg-[#1e4272]  min-h-[40px] px-4 py-2 sm:px-10 flex items-center max-sm:flex-col">
                 <button type="button" className="text-white text-sm">
                     <span className="mr-3 inline-block"><FaPhone /></span>
                     +180-548-2588
@@ -54,7 +54,7 @@ const [isAdmin] = useAdmin()
                     <Link to='/register' className="text-white text-sm ml-1">Register</Link>
                 </div>
             </section>
-            <div className="navbar bg-base-100">
+            <div className="navbar border-b-2 border-orange-400 mb-1">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
