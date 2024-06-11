@@ -51,7 +51,7 @@ const MyDonationsCampaigns = () => {
     if (isLoading) {
         return (
             <div className="flex flex-col items-center justify-center min-h-screen">
-                <Title heading={"Manage Donation Campaigns"} />
+                <Title heading={"Manage  Campaigns"} />
                 <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
                     <div className="w-full px-4">
                         <Skeleton height={40} count={1} />
@@ -64,7 +64,7 @@ const MyDonationsCampaigns = () => {
 
     return (
         <div>
-            <Title heading={"Manage Donation Campaigns"} />
+            <Title heading={"Manage Campaigns"} />
             {data && data.length > 0 ? (
                 <div className="overflow-x-auto border p-5 my-5 shadow-lg">
                     <table className="table">

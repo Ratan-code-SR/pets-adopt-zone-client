@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 const PetsCategory = ({ petsData }) => {
     return (
         <>
-            <div className="grid lg:grid-cols-3  sm:grid-cols-2 items-center justify-center gap-5">
+            <div className="grid lg:grid-cols-3 sm:grid-cols-2 items-center justify-center gap-5">
                 {
                     petsData.slice(0,6).map(pet => (<div className='w-full mt-3' key={pet._id}>
                         <div className="card card-compact w-full h-[400px] bg-base-100 shadow-xl">
-                            <figure><img className='w-full' src={pet.petImage} alt="Pets" /></figure>
+                            <figure><img className='w-full h-[400px] ' src={pet.petImage} alt="Pets" /></figure>
                             <div className="card-body">
                                 <h2 className="card-title">{pet.name}</h2>
                                 <div className='flex justify-between items-center'>
