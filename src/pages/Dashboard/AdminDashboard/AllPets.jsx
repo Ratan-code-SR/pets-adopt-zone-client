@@ -6,12 +6,10 @@ import Swal from "sweetalert2";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { Link } from "react-router-dom";
 import usePets from "../../../Hooks/usePets";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 
 const AllPets = () => {
-    const axiosPublic = useAxiosPublic();
     const [pets, loading, refetch] = usePets();
     const axiosSecure = useAxiosSecure()
 
@@ -26,7 +24,7 @@ const AllPets = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosPublic.delete(`/pets/${id}`)
+                axiosSecure.delete(`/pets/${id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             Swal.fire({

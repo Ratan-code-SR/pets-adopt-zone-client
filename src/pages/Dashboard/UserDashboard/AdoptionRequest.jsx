@@ -14,12 +14,11 @@ const AdoptionRequest = () => {
     const { data, isLoading, refetch } = useQuery({
         queryKey: ['adopt'],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/adopt/adoptEmail/${user?.email}`)
+            const res = await axiosSecure.get(`/adopt/request`)
             return res.data
         }
 
     })
-
     const handleIsReject = async (id,petId) => {
         const petsData = data.find(pet => pet.requestPetId === id);
         const petUpdateInfo = {
@@ -68,14 +67,19 @@ const AdoptionRequest = () => {
             </div>
         );
     }
+
+    if (!data) {
+        return <h1 className="text-center text-xl my-20">There are no requests.</h1>;
+    }
+    const owner = data.filter(p => p.ownerEmail == user?.email);
     return (
         <div>
             <Title  heading={'Manage All Request'} />
             {
-                data && data.length > 0 ?
+                owner && owner.length > 0 ?
                     (<div className="overflow-x-auto border p-5 my-5 shadow-lg">
                         <div>
-                            <p className="text-3xl font-bold my-3 text-blue-500">Total Request:{data.length} </p>
+                            <p className="text-3xl font-bold my-3 text-blue-500">Total Request:{owner.length} </p>
                         </div>
                         <table className="table">
                             {/* head */}
@@ -93,7 +97,7 @@ const AdoptionRequest = () => {
                             </thead>
                             <tbody>
                                 {/* row 1 */}
-                                {data.map((pet, index) =>
+                                {owner.map((pet, index) =>
                                     <tr key={pet._id}>
                                         <td>{index + 1}</td>
                                         <td>
@@ -105,7 +109,7 @@ const AdoptionRequest = () => {
                                         <td>{pet?.address}</td>
                                         <td className="">
                                             <button
-                                                disabled={data.adopted == 'false'}
+                                                disabled={owner.adopted == 'false'}
                                                 onClick={() => handleIsAccepted(pet.requestPetId, pet._id)}
                                                 className="text-sm ">
                                                 {

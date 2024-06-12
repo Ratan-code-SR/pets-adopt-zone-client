@@ -95,4 +95,3 @@ const PetListing = () => {
 };
 
 export default PetListing;
-
