@@ -11,6 +11,7 @@ import useAdmin from '../../Hooks/useAdmin';
 import { IoMdHome } from 'react-icons/io';
 import { BiDonateHeart } from 'react-icons/bi';
 import { FaListCheck } from "react-icons/fa6";
+import { SiMinutemailer } from "react-icons/si";
 const Navbar = () => {
     const { user, logOut } = useAuth()
     const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark')
@@ -42,6 +43,9 @@ const Navbar = () => {
         </li>
         <li className="text-md font-bold uppercase">
             <NavLink to='/donationCampaign'><span className="text-2xl"><BiDonateHeart /></span>Donation Campaigns</NavLink>
+        </li>
+        <li className="text-md font-bold uppercase">
+            <NavLink to='/contact'><span className="text-2xl"><SiMinutemailer /></span>Contact Us</NavLink>
         </li>
     </>
     return (

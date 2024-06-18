@@ -24,6 +24,7 @@ import AdoptionRequest from '../pages/Dashboard/UserDashboard/AdoptionRequest.js
 import DonationCampaign from '../pages/Home/DonationCampaign/DonationCampaign.jsx';
 import DonationsDetails from '../pages/Home/DonationCampaign/DonationsDetails.jsx';
 import ErrorPage from '../ErrorPage.jsx';
+import Contact from '../pages/Contact/Contact.jsx';
 const router = createBrowserRouter([
     {
         path: '*',
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
                 element: <DonationsDetails />,
                 loader: ({ params }) => fetch(`https://pet-adopt-zone-server.vercel.app/donations/${params.id}`)
             },
+            {
+                path:"/contact",
+                element:<Contact></Contact>
+            }
 
         ],
     },
