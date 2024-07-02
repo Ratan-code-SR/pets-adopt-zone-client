@@ -22,16 +22,16 @@ npm install
 3. Set Up Environment Variables:
 Create a .env file in the root directory.
 Add the following variables:
-VITE_apiKey,
-VITE_authDomain,
-VITE_projectId,
-VITE_storageBucket,
-VITE_messagingSenderId,
-VITE_appId,
+apiKey,
+authDomain,
+projectId,
+storageBucket,
+messagingSenderId,
+appId,
 VITE_imgBB_add_api_key,
 VITE_payment_key,
 
-4. Start the Development Server:
+4. Clone this server-side repository after Start the Development Server : (https://github.com/Ratan-code-SR/pets-adopt-zone-server)
 npm start
 
 5. Build for Production (Optional):
