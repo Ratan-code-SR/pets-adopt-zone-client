@@ -12,7 +12,7 @@ Live Link:
 Project Setup Instructions:
 1. Clone the Repository:
 
-git clone https://github.com/Ratan-code-SR/Choice-champion-client.git
+git clone https://github.com/Ratan-code-SR/pets-adopt-zone-client.git
 
 cd your-project
 
