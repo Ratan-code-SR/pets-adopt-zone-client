@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { useLoaderData } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { BallTriangle } from "react-loader-spinner";
 const EditDonationCampaign = () => {
     // const [updateDonationData, setUpdateDonationData] = useState([])
     const axiosSecure = useAxiosSecure()
@@ -54,13 +54,18 @@ const EditDonationCampaign = () => {
         }
     }
     if (isLoading) {
-        return <div>
-            <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
-                <p>
-                    <Skeleton count={3} />
-                </p>
-            </SkeletonTheme>
-        </div>
+        return <div className="flex justify-center items-center h-screen">
+        <BallTriangle
+            height={100}
+            width={100}
+            radius={5}
+            color="#4fa94d"
+            ariaLabel="ball-triangle-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+        />
+    </div>
     }
     return (
         <div>

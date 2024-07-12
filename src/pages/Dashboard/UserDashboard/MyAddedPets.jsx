@@ -6,8 +6,8 @@ import Title from '../../../pages/Title/Title';
 import { MdDelete, MdEditSquare } from "react-icons/md";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import useAuth from "../../../Hooks/useAuth";
+import { BallTriangle } from 'react-loader-spinner';
 
 const MyAddedPets = () => {
     const axiosSecure = useAxiosSecure();
@@ -26,16 +26,18 @@ const MyAddedPets = () => {
     const totalPages = data ? Math.ceil(data.totalCount / petsPerPage) : 1;
 
     if (isLoading) {
-        return (
-            <div>
-                <Title heading={'Manage All Pets'} />
-                <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
-                    <p>
-                        <Skeleton count={3} />
-                    </p>
-                </SkeletonTheme>
-            </div>
-        );
+        return <div className="flex justify-center items-center h-screen">
+        <BallTriangle
+            height={100}
+            width={100}
+            radius={5}
+            color="#4fa94d"
+            ariaLabel="ball-triangle-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+        />
+    </div>
     }
 
     const handleDelete = (id) => {

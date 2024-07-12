@@ -3,9 +3,8 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
 import Title from "../../Title/Title";
 import { useQuery } from "@tanstack/react-query";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import Swal from "sweetalert2";
-import 'react-loading-skeleton/dist/skeleton.css';
+import { BallTriangle } from "react-loader-spinner";
 
 const MyDonations = () => {
     const axiosSecure = useAxiosSecure()
@@ -20,17 +19,18 @@ const MyDonations = () => {
     })
 
     if (loading) {
-        return (
-            <div className="flex flex-col items-center justify-center min-h-screen">
-                <Title heading="My Donations" />
-                <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
-                    <div className="w-full px-4">
-                        <Skeleton height={40} count={1} />
-                        <Skeleton height={20} count={10} className="mt-4" />
-                    </div>
-                </SkeletonTheme>
-            </div>
-        );
+        return <div className="flex justify-center items-center h-screen">
+            <BallTriangle
+                height={100}
+                width={100}
+                radius={5}
+                color="#4fa94d"
+                ariaLabel="ball-triangle-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+            />
+        </div>
     }
     const totalDonations = myDonation.reduce((total, item) => total + parseInt(item.amount), 0)
     const handleRefund = (id) => {

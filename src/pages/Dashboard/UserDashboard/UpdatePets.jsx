@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import Title from "../../Title/Title";
 import { useLoaderData } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { BallTriangle } from "react-loader-spinner";
 
 const UpdatePets = () => {
     const [selectedOption, setSelectedOption] = useState(null);
@@ -79,15 +79,18 @@ const UpdatePets = () => {
         }
     };
     if (isLoading) {
-        return <div className="flex flex-col items-center justify-center min-h-screen">
-            <Title heading="Update information" />
-            <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
-                <div className="w-full px-4">
-                    <Skeleton height={40} count={1} />
-                    <Skeleton height={20} count={10} className="mt-4" />
-                </div>
-            </SkeletonTheme>
-        </div>
+        return <div className="flex justify-center items-center h-screen">
+        <BallTriangle
+            height={100}
+            width={100}
+            radius={5}
+            color="#4fa94d"
+            ariaLabel="ball-triangle-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+        />
+    </div>
     }
     return (
         <div>

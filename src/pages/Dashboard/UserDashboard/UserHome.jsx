@@ -1,13 +1,12 @@
 
 import { MdOutlinePets } from "react-icons/md";
 import { MdOutlineCreateNewFolder } from "react-icons/md";
-
 import { GiWallet } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import UserChart from "../Chart/UserChart";
+import { BallTriangle } from "react-loader-spinner";
 const UserHome = () => {
     const [pets, setPets] = useState([])
     const [donation, setDonation] = useState([])
@@ -29,13 +28,17 @@ const UserHome = () => {
     const totalDonationAmount = donation.reduce((total, donation) => total + parseInt(donation.amount), 0)
 
     if (loading) {
-        return <div className="flex flex-col items-center justify-center min-h-screen">
-            <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
-                <div className="w-full px-4">
-                    <Skeleton height={40} count={1} />
-                    <Skeleton height={20} count={10} className="mt-4" />
-                </div>
-            </SkeletonTheme>
+        return <div className="flex justify-center items-center h-screen">
+            <BallTriangle
+                height={100}
+                width={100}
+                radius={5}
+                color="#4fa94d"
+                ariaLabel="ball-triangle-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+            />
         </div>
     }
     return (

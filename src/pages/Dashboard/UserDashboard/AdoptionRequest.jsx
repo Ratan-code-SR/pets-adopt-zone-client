@@ -4,9 +4,9 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Title from '../../../pages/Title/Title';
 import { GoCheck } from "react-icons/go";
 import { IoMdRemoveCircle } from "react-icons/io";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { BallTriangle } from "react-loader-spinner";
 const AdoptionRequest = () => {
     const axiosSecure = useAxiosSecure()
     const axiosPublic = useAxiosPublic()
@@ -55,17 +55,18 @@ const AdoptionRequest = () => {
     }
 
     if (isLoading) {
-        return (
-            <div className="flex flex-col items-center justify-center min-h-screen">
-                <Title heading="Manage All Pets" />
-                <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
-                    <div className="w-full px-4">
-                        <Skeleton height={40} count={1} />
-                        <Skeleton height={20} count={10} className="mt-4" />
-                    </div>
-                </SkeletonTheme>
-            </div>
-        );
+        return <div className="flex justify-center items-center h-screen">
+        <BallTriangle
+            height={100}
+            width={100}
+            radius={5}
+            color="#4fa94d"
+            ariaLabel="ball-triangle-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+        />
+    </div>
     }
 
     if (!data) {

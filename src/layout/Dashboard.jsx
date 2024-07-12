@@ -6,23 +6,25 @@ import { PiUsersThreeBold, PiUsersFourFill } from "react-icons/pi";
 import { MdOutlineCreateNewFolder, MdOutlinePets } from "react-icons/md";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import useAdmin from "../Hooks/useAdmin";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css"; // Ensure this is imported for additional styles
 import { GiHamburgerMenu } from "react-icons/gi";
 import logo from "../assets/logo/logo.png"
 import useAuth from "../Hooks/useAuth";
+import { BallTriangle } from "react-loader-spinner";
 const Dashboard = () => {
     const [isAdmin, isAdminLoading] = useAdmin()
     const { user } = useAuth()
     if (isAdminLoading) {
-        return <div>
-            <div className="p-4">
-                <SkeletonTheme baseColor="#f1eff1" highlightColor="#444">
-                    <Skeleton height={50} />
-                    <Skeleton height={50} />
-                    <Skeleton height={50} />
-                </SkeletonTheme>
-            </div>
+        return <div className="flex justify-center items-center h-screen">
+            <BallTriangle
+                height={100}
+                width={100}
+                radius={5}
+                color="#4fa94d"
+                ariaLabel="ball-triangle-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+            />
         </div>
     }
     return (
